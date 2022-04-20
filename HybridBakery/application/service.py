@@ -1,11 +1,11 @@
 from application.models.product import Product
 
 
-def display_products():
+def get_products():
     return Product.query.all()
 
 
-def get_bake(id):
-    bake = Product.query.filter_by(id=id).first()
-    return bake
+def get_product(id):
+    product = Product.query.filter_by(id=id).first()
+    return product
 

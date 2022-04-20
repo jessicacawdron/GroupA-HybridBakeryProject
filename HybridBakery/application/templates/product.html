@@ -1,22 +1,23 @@
 <!-- inherits from layout.html template -->
 {% extends "layout.html" %}
+<!-- this block of content drops into placeholder in layout.html -->
+{% block body_content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Product Page</title>
+    <title>Product Page for {{product.product_name}} </title>
 </head>
 <body>
-<h1> Bwello</h1>
-<!-- this block of content drops into placeholder in layout.html -->
-{% block body_content %}
 <div>
-{% for product in product %}
-   <p>{{product.product_name}} {{product.price}} {{product.product_description}}</p>
-{% endfor %}
+
+   <p> </p>
+    <p>{{product.product_description}}</p>
+
     <br>
     {{ message }}
 </div>
-{% endblock %}
 </body>
 </html>
+<!-- end of content to fill placeholder in layout.html -->
+{% endblock %}

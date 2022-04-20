@@ -11,14 +11,14 @@ def welcome():
 @app.route('/products', methods=['GET'])
 def show_products():
     error = ""
-    details = service.display_products()
+    details = service.get_products()
     if len(details) == 0:
         error = "There are no products to display"
-    return render_template('product.html', product=details, message=error)
+    return render_template('products.html', product=details, message=error)
 
 
-@app.route('/bakes/<int:id>')
-def show_bake(id):
-    return render_template('bake.html', bake = service.get_bake(id), message='What a tasty bake.')
+@app.route('/products/<int:id>')
+def show_product(id):
+    return render_template('product.html', product = service.get_product(id), message='What a tasty bake.')
 
 
