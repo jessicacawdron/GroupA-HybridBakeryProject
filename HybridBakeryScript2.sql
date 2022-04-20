@@ -19,3 +19,6 @@ FROM order_details;
 
 SELECT *
 FROM order_items;
+
+INSERT INTO address(first_line, second_line, town, postcode) VALUES ('11 Green Rise', 'Headingley', 'Leeds', 'LS4 8FT'),('103 New Street', 'High Green', 'Sheffield', 'S12 4ND'),('95 Park Row', 'Sheepridge', 'Huddersfield', 'HD13 6TH');
+INSERT INTO customer(first_name, last_name, email, phone_number, home_address, billing_address) VALUES ('Connor', 'Larkin', 'CLarkin@email.com', '07356673985', 2, 2), ('Sally','Long', 'SallyL@email.co.uk','074982762892',3,3), ('James','Ellis', 'JamesEllis@email.com','07345786211');
