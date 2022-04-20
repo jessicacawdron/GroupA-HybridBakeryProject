@@ -19,3 +19,4 @@ class Customer(db.Model):
     phone_number = db.Column(db.String(10), nullable=False)
     home_address = db.Column(db.Integer, db.ForeignKey("address.id"), nullable=False)
     billing_address = db.Column(db.Integer, db.ForeignKey("address.id"), nullable=False)
+

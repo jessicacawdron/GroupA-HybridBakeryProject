@@ -15,3 +15,5 @@ class Product(db.Model):
     product_name = db.Column(db.String(100), nullable=True)
     price = db.Column(db.Numeric, nullable=True)
     product_description = db.Column(db.String(300), nullable=True)
+
+
