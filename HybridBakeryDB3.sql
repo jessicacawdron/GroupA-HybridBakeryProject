@@ -15,7 +15,7 @@ billing_address_id INT NOT NULL,
 FOREIGN KEY(home_address_id) REFERENCES address(id),
 FOREIGN KEY(billing_address_id) REFERENCES address(id));
 
-CREATE TABLE order_details(
+CREATE TABLE order_detail(
 id INT PRIMARY KEY AUTO_INCREMENT,
 customer_id INT NOT NULL,
 order_value DECIMAL(10,2) NOT NULL,
@@ -26,11 +26,11 @@ delivery_recipient VARCHAR(100) NOT NULL,
 FOREIGN KEY(customer_id) REFERENCES customer(id),
 FOREIGN KEY(delivery_address_id) REFERENCES address(id));
 
-CREATE TABLE order_items(
+CREATE TABLE order_item(
 id INT PRIMARY KEY AUTO_INCREMENT,
 order_id INT NOT NULL,
 product_id INT NOT NULL,
 quantity INT NOT NULL,
 product_price DECIMAL(10,2) NOT NULL,
-FOREIGN KEY(order_id) REFERENCES order_details(id),
+FOREIGN KEY(order_id) REFERENCES order_detail(id),
 FOREIGN KEY(product_id) REFERENCES product(id));
