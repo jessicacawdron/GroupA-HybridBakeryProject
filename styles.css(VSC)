@@ -1,0 +1,90 @@
+*{
+
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+#header{
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+}
+
+.navbar{
+    padding: 50px 0;
+
+}
+
+.navbar-brand{
+    font-weight: bold;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    color: rgb(151, 132, 24) !important;
+}
+
+.nav-item{
+    font-weight: 600;
+    text-transform: uppercase;
+    padding-left: 50px;
+}
+
+.nav-link{
+    color: rgb(199, 34, 150) !important;
+    letter-spacing: 2px;
+    font-size: 1.4em;
+    font-weight: 700;
+}
+
+.nav-link:hover{
+    background: #0ed4d4 !important;
+    color: #262626 !important;
+    border-radius: 5px;
+    transition: all 0.6 ease 0s;
+}
+
+.main{
+    position: relative;
+    background: url(backgroundcartoondesserts.jpg);
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    padding: 280px 0 220px;
+    filter: blur(2.5px);
+
+
+}
+.main h1{
+    background-color:rgb(0, 0, 0);
+    background-color: rgba(161, 110, 0, 0.4);
+    font-size: 2.6em;
+    color: #dcdde1;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    text-align: center;
+    padding: 20px;
+}
+
+.main p{
+    margin-top: 8em;
+    padding: 0;
+    font-size: 30px;
+    color: rgb(0, 0, 0);
+    padding: 25px;
+}
+
+.main .readMore{
+    background: #315a91;
+    color:#fff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-decoration: none;
+}
