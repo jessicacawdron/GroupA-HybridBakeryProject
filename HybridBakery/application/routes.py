@@ -20,7 +20,7 @@ def show_products():
 @app.route('/products/<int:id>')
 def show_product(id):
     #filename = "{}.jpg".format(product_name)#
-    return render_template('product.html', product = service.get_product(id), message='What a tasty bake.')
+    return render_template('product.html', product = service.get_product(id))
     #product_name = product_name, filename = filename,# '#
 
 @app.route('/orders', methods=['GET'])

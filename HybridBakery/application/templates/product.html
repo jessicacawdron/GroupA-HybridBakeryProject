@@ -10,17 +10,16 @@
 <!-- this block of content drops into placeholder in layout.html -->
 {% block body_content %}
 <div>
-    <h1>Hybrid Bakery's {{product.product_name}}</h1>
- <img src="{{ url_for('static', filename='images/Cruffin.jpg') }}" />
-    {# add dynamically rendered image here - will require extra field product_image in product table #}
-{#first attempt at dynamic image #}
-    {% set img = '{}.jpg'.format(product.product_name) %}
-    <img src="{{ url_for('static', filename='/images/' + img) }}" />
-   <p> {{product.price}} </p>
-    <p>{{product.product_description}}</p>
+    <h1>{{product.product_name}}</h1>
+    <div class="text-center">
+        {# code to render dynamic image and image description #}
+        {% set img = '{}.jpg'.format(product.product_name) %}
 
-    <br>
-    {{ message }}
+        <img src="{{ url_for('static', filename='/images/' + img) }}" alt="{{product.product_name}}" />
+    </div>
+
+    <p>{{product.product_description}}</p>
+    <p> £{{product.price}} </p>
 </div>
 {% endblock %}
 </body>
