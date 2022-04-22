@@ -55,3 +55,7 @@ th, td {
     border: 4px solid darkslategrey;
     border-radius: 10%;
   }
+
+  .bg-darkslategrey{
+  background-color: darkslategrey;
+  color: white;}
