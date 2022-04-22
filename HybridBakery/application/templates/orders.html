@@ -1,0 +1,34 @@
+<!-- inherits from layout.html template -->
+{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders Page</title>
+</head>
+<body>
+
+<!-- this block of content drops into placeholder in layout.html -->
+{% block body_content %}
+<h1> All Orders</h1>
+<div>
+    <table>
+{% for order_details in order_details %}
+<TR>
+   <!-- add images? <TD class="c1"><IMG src="favicon.ico"></TD> -->
+   <TD class="c1">{{order_details.id}}</TD>
+   <TD class="c2">{{order_details.customer_id}}</TD>
+   <TD class="c3">{{order_details.order_value}}</TD>
+   <TD class="c4">{{order_details.order_date}}</TD>
+   <TD class="c5">{{order_details.order_status}}</TD>
+   <TD class="c6">{{order_details.delivery_address}}</TD>
+   <TD class="c7">{{order_details.delivery_recipient}}</TD>
+
+</TR>
+
+{% endfor %}
+    </table>
+</div>
+{% endblock %}
+</body>
+</html>

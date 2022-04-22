@@ -1,0 +1,24 @@
+<!-- inherits from layout.html template -->
+{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weekly Orders</title>
+</head>
+<body>
+
+<!-- this block of content drops into placeholder in layout.html -->
+{% block body_content %}
+<h1> Orders This Week - is this useful?</h1>
+<div>
+{% for order_details in order_details %}
+   <p>{{order_details.order_date}} {{order_details.order_status}} {{order_details.order_value}}</p>
+{% endfor %}
+
+    <br>
+    {{ message }}
+</div>
+{% endblock %}
+</body>
+</html>
