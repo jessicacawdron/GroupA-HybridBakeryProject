@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Order_item(db.Model):
+class Order_items(db.Model):
     id: int
     order_id: int
     product_id: int
