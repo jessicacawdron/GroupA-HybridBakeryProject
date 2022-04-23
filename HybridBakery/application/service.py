@@ -1,6 +1,10 @@
 from application.models.product import Product
 from application.models.order_details import Order_details
 
+# putting this script here for future use as will need sessions when we ask users to log in
+#engine = create_engine('mysql+pymysql://root@localhost/hybrid_bakery', echo=True)
+#Session = sessionmaker(bind=engine)
+#session = Session()
 def get_products():
     return Product.query.all()
 

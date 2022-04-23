@@ -1,0 +1,19 @@
+<!-- inherits from layout.html template -->
+{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error Page</title>
+</head>
+    <body>
+
+<!-- this block of content drops into placeholder in layout.html -->
+{% block body_content %}
+        <h1> We're sorry, something went wrong</h1>
+            <div>
+{{error}} not found
+            </div>
+{% endblock %}
+    </body>
+</html>
