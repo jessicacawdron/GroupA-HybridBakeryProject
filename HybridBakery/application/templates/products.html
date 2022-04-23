@@ -24,7 +24,7 @@
 {% for product in product %}
 <TR>
    <!-- add images? <TD class="c1"><IMG src="favicon.ico"></TD> -->
-   <TD class="c1">{{product.product_name}}</TD>
+   <TD class="c1"><a href="/products/{{product.product_name}}">{{product.product_name}}</a></TD>
    <TD class="c2">£{{product.price}}</TD>
    <TD class="c3"><SPAN>{{product.product_description}}</SPAN></TD>
 </TR>
