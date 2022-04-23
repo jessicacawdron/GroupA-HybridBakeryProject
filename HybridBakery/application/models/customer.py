@@ -8,6 +8,7 @@ class Customer(db.Model):
     first_name: str
     last_name: str
     email: str
+    pass_word: str
     phone_number: str
     home_address_id: int
     billing_address_id: int
@@ -16,6 +17,7 @@ class Customer(db.Model):
     first_name = db.Column(db.String(35), nullable=False)
     last_name = db.Column(db.String(35), nullable=False)
     email = db.Column(db.String(35), nullable=False)
+    pass_word = db.Column(db.String(12), nullable=False)
     phone_number = db.Column(db.String(10), nullable=False)
     home_address_id = db.Column(db.Integer, db.ForeignKey("address.id"), nullable=False)
     billing_address_id = db.Column(db.Integer, db.ForeignKey("address.id"), nullable=False)
