@@ -10,14 +10,22 @@
 
 <!-- this block of content drops into placeholder in layout.html -->
 {% block body_content %}
-<h1> Our Product Range</h1>
+<h1> Our Full Product Range</h1>
 <div>
-    <table>
+    <table class="table">
+  <thead class = "thead-light">
+    <tr>
+      <th scope="col">Product</th>
+      <th scope="col">Price</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
 {% for product in product %}
 <TR>
    <!-- add images? <TD class="c1"><IMG src="favicon.ico"></TD> -->
    <TD class="c1">{{product.product_name}}</TD>
-   <TD class="c2">{{product.price}}</TD>
+   <TD class="c2">£{{product.price}}</TD>
    <TD class="c3"><SPAN>{{product.product_description}}</SPAN></TD>
 </TR>
 
