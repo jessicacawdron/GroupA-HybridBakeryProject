@@ -12,6 +12,10 @@ def get_product(id):
     product = Product.query.filter_by(id=id).first()
     return product
 
+def get_product_by_name(product_name):
+    product = Product.query.filter_by(product_name=product_name).first()
+    return product
+
 def get_all_orders():
     return Order_details.query.all()
 

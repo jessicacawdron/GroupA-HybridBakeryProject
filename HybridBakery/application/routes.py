@@ -16,10 +16,22 @@ def show_products():
         error = "There are no products to display"
     return render_template('products.html', product=details, message=error)
 
-
+"""
+retired route to make urls more user friendly
 @app.route('/products/<int:id>')
 def show_product(id):
     product = service.get_product(id)
+    if product is None:
+        return render_template('error.html', error='Product')
+    #filename = "{}.jpg".format(product_name)#
+    return render_template('product.html', product=product)
+    #product_name = product_name, filename = filename,# '#
+"""
+
+
+@app.route('/products/<name>')
+def show_product(name):
+    product = service.get_product_by_name(name)
     if product is None:
         return render_template('error.html', error='Product')
     #filename = "{}.jpg".format(product_name)#
