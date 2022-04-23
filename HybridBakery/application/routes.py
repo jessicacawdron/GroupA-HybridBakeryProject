@@ -5,7 +5,7 @@ from application import app, service
 
 @app.route('/home', methods=['GET'])
 def welcome():
-    return 'Welcome to The Hybrid Bakery!'
+    return render_template('home.html')
 
 
 @app.route('/products', methods=['GET'])
