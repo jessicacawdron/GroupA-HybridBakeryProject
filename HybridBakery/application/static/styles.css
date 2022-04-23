@@ -35,14 +35,11 @@ table{
 
 table, th, td {
     border: 1px solid darkslategrey;
+    color: darkslategrey;
   }
 th, td {
     padding: 15px;
     text-align: left;
-  }
-  th {
-    background-color: darkslategrey;
-    color: white;
   }
   footer {
       padding: 50px;
@@ -55,3 +52,7 @@ th, td {
     border: 4px solid darkslategrey;
     border-radius: 10%;
   }
+
+  .bg-darkslategrey{
+  background-color: darkslategrey;
+  color: white;}

@@ -12,7 +12,19 @@
 {% block body_content %}
 <h1> All Orders</h1>
 <div>
-    <table>
+    <table class="table">
+  <thead class = "thead-light">
+    <tr>
+      <th scope="col">Order Number</th>
+      <th scope="col">Customer Number</th>
+      <th scope="col">Value</th>
+      <th scope="col">Date</th>
+      <th scope="col">Status</th>
+      <th scope="col">Delivery Address</th>
+      <th scope="col">Recipient</th>
+    </tr>
+  </thead>
+  <tbody>
 {% for order_details in order_details %}
 <TR>
    <!-- add images? <TD class="c1"><IMG src="favicon.ico"></TD> -->
