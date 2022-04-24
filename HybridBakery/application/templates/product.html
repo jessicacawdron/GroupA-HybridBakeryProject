@@ -1,5 +1,7 @@
 <!-- inherits from layout.html template -->
 {% extends "layout.html" %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +23,12 @@
     <p>{{product.product_description}}</p>
 
     <p class="h2"><span class="badge bg-darkslategrey"> £{{product.price}} </span></p>
+    {{ form.content}}
+    <form action="/products/{{product.product_name}}" method="post">
+        <!--<input type="hidden" value="1" name="{{product.product_name}}">
+        <input type="submit" value="Add to basket"> -->
+        {{form.quantity.label}} {{form.quantity(size=2)}} {{form.submit}}
+    </form>
 
 {% endblock %}
 </body>
