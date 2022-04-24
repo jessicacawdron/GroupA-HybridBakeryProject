@@ -1,8 +1,8 @@
 USE hybrid_bakery;
 
-DROP TABLE customer;
-DROP TABLE order_details;
 DROP TABLE order_items;
+DROP TABLE order_details;
+DROP TABLE customer;
 
 CREATE TABLE customer(
 id INT PRIMARY KEY AUTO_INCREMENT,
