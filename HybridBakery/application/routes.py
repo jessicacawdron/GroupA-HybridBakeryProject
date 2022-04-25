@@ -17,6 +17,16 @@ def show_products():
         error = "There are no products to display"
     return render_template('products.html', product=details, message=error)
 
+@app.route('/checkout', methods=['GET', 'POST'])
+def show_basket():
+    checkout_total= float(0.00)
+    error = ""
+    products = service.get_checkout_products()
+    if len(products) == 0:
+        error = "There is nothing in your basket"
+    for product in products:
+        checkout_total += float(product.total)
+    return render_template('checkout.html', products=products, checkout_total=checkout_total, message=error)
 
 """
 retired route to make urls more user friendly

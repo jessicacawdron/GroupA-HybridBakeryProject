@@ -1,0 +1,46 @@
+<!-- inherits from layout.html template -->
+{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Page</title>
+</head>
+<body>
+
+<!-- this block of content drops into placeholder in layout.html -->
+{% block body_content %}
+<h1>Checkout</h1>
+<div>
+    <table class="table">
+  <thead class = "thead-light">
+    <tr>
+      <th scope="col">Product</th>
+      <th scope="col">Price</th>
+      <th scope="col">Qty</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for product in products %}
+<TR>
+   <!-- add images? <TD class="c1"><IMG src="favicon.ico"></TD> -->
+   <TD class="c1"><a href="/products/{{product.product_name}}">{{product.product_name}}</a></TD>
+   <TD class="c2">£{{product.price}}</TD>
+   <TD class="c3">{{session[product.product_name]}}</TD>
+   <TD class="c4">£{{product.total}}</TD>
+</TR>
+
+{% endfor %}
+<TR>
+
+   <TD class="c1"></TD>
+   <TD class="c2"></TD>
+   <TD class="c3">Grand Total</TD>
+   <TD class="c4">£{{checkout_total}}</TD>
+</TR>
+    </table>
+</div>
+{% endblock %}
+</body>
+</html>
