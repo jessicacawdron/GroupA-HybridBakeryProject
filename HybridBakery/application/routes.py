@@ -44,7 +44,7 @@ def show_orders():
     details = service.get_all_orders()
     if details is None:
         error = "There are no orders to display this week :("
-    return render_template('orders.html', order_details=details, message=error)
+    return render_template('orders.html', order_detail=details, message=error)
 
 @app.route('/orders/madethisweek', methods=['GET'])
 def show_weekly_orders():
@@ -52,5 +52,5 @@ def show_weekly_orders():
     details = service.get_this_weeks_orders()
     if len(details) == 0:
         error = "There are no orders to display this week :("
-    return render_template('weeks_orders.html', order_details=details, message=error)
+    return render_template('weeks_orders.html', order_detail=details, message=error)
 

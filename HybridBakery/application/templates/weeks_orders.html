@@ -12,8 +12,8 @@
 {% block body_content %}
 <h1> Orders This Week - is this useful?</h1>
 <div>
-{% for order_details in order_details %}
-   <p>{{order_details.order_date}} {{order_details.order_status}} {{order_details.order_value}}</p>
+{% for order_detail in order_detail %}
+   <p>{{order_detail.order_date}} {{order_detail.order_status}} {{order_detail.order_value}}</p>
 {% endfor %}
 
     <br>

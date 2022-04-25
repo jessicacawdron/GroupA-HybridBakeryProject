@@ -25,16 +25,16 @@
     </tr>
   </thead>
   <tbody>
-{% for order_details in order_details %}
+{% for order_detail in order_detail %}
 <TR>
    <!-- add images? <TD class="c1"><IMG src="favicon.ico"></TD> -->
-   <TD class="c1">{{order_details.id}}</TD>
-   <TD class="c2">{{order_details.customer_id}}</TD>
-   <TD class="c3">{{order_details.order_value}}</TD>
-   <TD class="c4">{{order_details.order_date}}</TD>
-   <TD class="c5">{{order_details.order_status}}</TD>
-   <TD class="c6">{{order_details.delivery_address}}</TD>
-   <TD class="c7">{{order_details.delivery_recipient}}</TD>
+   <TD class="c1">{{order_detail.id}}</TD>
+   <TD class="c2">{{order_detail.customer_id}}</TD>
+   <TD class="c3">{{order_detail.order_value}}</TD>
+   <TD class="c4">{{order_detail.order_date}}</TD>
+   <TD class="c5">{{order_detail.order_status}}</TD>
+   <TD class="c6">{{order_detail.delivery_address_id}}</TD>
+   <TD class="c7">{{order_detail.delivery_recipient}}</TD>
 
 </TR>
 
