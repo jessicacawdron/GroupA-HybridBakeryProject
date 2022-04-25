@@ -4,3 +4,4 @@ pymysql
 WTForms==3.0.1
 SQLAlchemy==1.4.35
 cryptography
+flask_wtf
