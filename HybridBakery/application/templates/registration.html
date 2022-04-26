@@ -1,0 +1,68 @@
+<!-- inherits from layout.html template -->
+{% extends "layout.html" %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- this block of content drops into placeholder in layout.html -->
+{% block body_content %}
+<h1>Register</h1>
+
+<form method="POST" action="">
+  <!-- provides CRSF protection, alongside secret key. Use on all POST forms -->
+  {{ form.csrf_token }}
+  <div class="form-row">
+    <div class="form-group col-6">
+      <label for="inputEmail4">Email</label>
+      <input type="email" class="form-control" id="inputEmail4" placeholder="example@email.com">
+    </div>
+    <div class="form-group col-6">
+      <label for="inputPassword4">Password</label>
+      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+    </div>
+  </div>
+    <div class="form-row">
+    <div class="form-group col-4">
+      <label for="inputFirstName">First Name</label>
+      <input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+    </div>
+    <div class="form-group col-4">
+      <label for="inputLastName">Last Name</label>
+      <input type="text" class="form-control" id="inputLastName" placeholder="Surname">
+    </div>
+    <div class="form-group col-4">
+      <label for="inputPhoneNumber">Contact Number</label>
+      <input type="number" class="form-control" id="inputPhoneNumber" placeholder="Phone Number">
+    </div>
+  </div>
+  <br>
+  <h4> Address </h4>
+  <div class="form-group col-6">
+    <label for="inputAddress">First Line of Address</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="First line of address">
+  </div>
+  <div class="form-group col-6">
+    <label for="inputAddress2">Second Line of Address</label>
+    <input type="text" class="form-control" id="inputAddress2" placeholder="Second line of address">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-6">
+      <label for="inputTown">Town</label>
+      <input type="text" class="form-control" id="inputTown">
+    </div>
+    <div class="form-group col-6">
+      <label for="inputPostcode">Postcode</label>
+      <input type="text" class="form-control" id="inputPostcode">
+    </div>
+  </div>
+  <div class="col-sm-10">
+    <br>
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </div>
+</form>
+
+{% endblock %}
+</body>

@@ -1,7 +1,8 @@
 from flask import render_template, session, redirect, request
 from application import app, service
 #    , forms
-from HybridBakery.application.forms.basket import AddToBasketForm
+from application.forms.basket import AddToBasketForm
+from application.forms.registration import RegistrationForm
 
 
 @app.route('/home', methods=['GET'])
@@ -17,6 +18,7 @@ def show_products():
         error = "There are no products to display"
     return render_template('products.html', product=details, message=error)
 
+
 @app.route('/checkout', methods=['GET', 'POST'])
 def show_basket():
     checkout_total= float(0.00)
@@ -27,6 +29,13 @@ def show_basket():
     for product in products:
         checkout_total += float(product.total)
     return render_template('checkout.html', products=products, checkout_total=checkout_total, message=error)
+
+
+@app.route('/registration', methods=['GET','POST'])
+def register():
+    form = RegistrationForm
+    return render_template('registration.html', title='Registration', form=form)
+
 
 """
 retired route to make urls more user friendly
