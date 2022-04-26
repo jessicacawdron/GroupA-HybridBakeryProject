@@ -15,6 +15,5 @@ class Address(db.Model):
     second_line = db.Column(db.String(100), nullable=True)
     town = db.Column(db.String(35), nullable=False)
     postcode = db.Column(db.String(10), nullable=False)
-    home = db.relationship('Customer', primaryjoin="Address.id==Customer.home_address_id",
-                                backref='customer')
-    billing = db.relationship('Customer', primaryjoin="Address.id==Customer.billing_address_id", backref='customer')
+    home = db.relationship('Customer', primaryjoin="Address.id==Customer.home_address_id", backref='customer')
+    billing = db.relationship('Customer', primaryjoin="Address.id==Customer.billing_address_id")
