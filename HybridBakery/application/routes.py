@@ -114,27 +114,32 @@ def show_weekly_orders():
 @app.route('/signup')
 def signup():
     form = RegistrationForm()
-    form2 = AddressForm()   # not sure how to put two forms in render_template
+    # form2 = AddressForm()   # not sure how to put two forms in render_template
     return render_template('registration.html', form=form)
 
 
-@app.route('/signup', methods=['POST'])
+@app.route('/signup', methods=['GET', 'POST'])
 def signup_post():
-    email = request.form.get('email')
-    password = request.form.get('password')
-    first_name = request.form.get('first_name')
-    last_name = request.form.get('last_name')
-    phone_number = request.form.get('phone_number')
+    form = RegistrationForm()
+    if request.method == 'POST':
+        form = RegistrationForm(request.form)
 
-    first_line = request.form.get('first_line')
-    second_line = request.form.get('second_line')
-    town = request.form.get('town')
-    postcode = request.form.get('postcode')
+        email = form.email.data
+        password = form.password.data
+        first_name = form.first_name.data
+        last_name = form.last_name.data
+        phone_number = form.phone_number.data
 
-    customer = Customer.query.filter_by(email=email).first()  # if this returns a user, then the email already exists in database
+        first_line = form.first_line.data
+        second_line = form.second_line.data
+        town = form.town.data
+        postcode = form.postcode.data
+
+        customer = Customer.query.filter_by(email=email).first()  # if this returns a user, then the email already exists in database
 
     if customer:  # if a user is found, we want to redirect back to signup page so user can try again
         return redirect(url_for('signup'))
+
 
     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
     new_customer = Customer(email=email, pass_word=generate_password_hash(password, method='sha256'), first_name = first_name, last_name=last_name, phone_number=phone_number)
