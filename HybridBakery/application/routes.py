@@ -13,7 +13,6 @@ from HybridBakery.application.models.address import Address
 from HybridBakery.application.models.customer import Customer
 
 
-
 @app.route('/home', methods=['GET'])
 def welcome():
     return render_template('home.html')
@@ -114,7 +113,7 @@ def show_weekly_orders():
 @app.route('/signup')
 def signup():
     form = RegistrationForm()
-    return render_template('registration.html', form=form)
+    return render_template('registration.html', title='Signup', form=form)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -137,6 +136,7 @@ def signup_post():
         customer = Customer.query.filter_by(email=email).first()  # if this returns a user, then the email already exists in database
 
     if customer:  # if a user is found, we want to redirect back to signup page so user can try again
+        flash('Email address already exists')
         return redirect(url_for('signup'))
 
     new_address = Address(first_line=first_line, second_line=second_line, town=town, postcode=postcode)
@@ -152,16 +152,17 @@ def signup_post():
 
     return redirect(url_for('login'))
 
+
 @app.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html', name=current_user.first_name)
+    return render_template('profile.html', title='Profile', name=current_user.first_name)
 
 
 @app.route('/login')
 def login():
     form = LoginForm()
-    return render_template('login.html', form=form)
+    return render_template('login.html', title='Login', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])

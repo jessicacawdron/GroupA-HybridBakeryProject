@@ -11,7 +11,14 @@
 {% block body_content %}
 <h1>Register</h1>
 
-<form method="POST" action="">
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0] }}. Go to <a href="{{ url_for('login') }}">login page</a>.
+    </div>
+{% endif %}
+{% endwith %}
+<form method="POST" action="/signup">
   <!-- provides CRSF protection, alongside secret key. Use on all POST forms -->
   {{ form.csrf_token }}
   <div class="form-row">
