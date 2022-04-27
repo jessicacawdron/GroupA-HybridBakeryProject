@@ -4,5 +4,5 @@ from wtforms import StringField, SubmitField, IntegerField, PasswordField
 
 class LoginForm(FlaskForm):
     email = StringField('Email')
-    pass_word = PasswordField('Password')
+    password = PasswordField('Password')
     submit = SubmitField('Login')

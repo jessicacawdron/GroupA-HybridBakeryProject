@@ -114,13 +114,12 @@ def show_weekly_orders():
 @app.route('/signup')
 def signup():
     form = RegistrationForm()
-    # form2 = AddressForm()   # not sure how to put two forms in render_template
     return render_template('registration.html', form=form)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup_post():
-    form = RegistrationForm()
+
     if request.method == 'POST':
         form = RegistrationForm(request.form)
 
@@ -140,14 +139,15 @@ def signup_post():
     if customer:  # if a user is found, we want to redirect back to signup page so user can try again
         return redirect(url_for('signup'))
 
+    new_address = Address(first_line=first_line, second_line=second_line, town=town, postcode=postcode)
+    db.session.add(new_address)
+    db.session.commit()
 
     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
-    new_customer = Customer(email=email, pass_word=generate_password_hash(password, method='sha256'), first_name = first_name, last_name=last_name, phone_number=phone_number)
-    new_address = Address(first_line=first_line, second_line=second_line, town=town, postcode=postcode)
+
+    new_customer = Customer(email=email, pass_word=generate_password_hash(password, method='sha256'), first_name = first_name, last_name=last_name, phone_number=phone_number, home_address_id=new_address.id, billing_address_id=new_address.id)
     # add the new user to the database
     db.session.add(new_customer)
-    db.session.commit()
-    db.session.add(new_address)
     db.session.commit()
 
     return redirect(url_for('login'))
@@ -164,18 +164,20 @@ def login():
     return render_template('login.html', form=form)
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login_post():
     # login code goes here
-    email = request.form.get('email')
-    password = request.form.get('password')
+    if request.method == 'POST':
+        form = LoginForm(request.form)
+        email = form.email.data
+        password = form.password.data
 
     customer = Customer.query.filter_by(email=email).first()
     # check if the user actually exists
     # take the user-supplied password, hash it, and compare it to the hashed password in the database
     if not customer or not check_password_hash(customer.pass_word, password):
         flash('Please check your login details and try again.')
-        return redirect(url_for('login')) # if the user doesn't exist or password is wrong, reload the page
+        return redirect(url_for('login'))  # if the user doesn't exist or password is wrong, reload the page
 
     # if the above check passes, then we know the user has the right credentials
     login_user(customer)
