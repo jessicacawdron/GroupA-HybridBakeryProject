@@ -1,8 +1,17 @@
-from flask import render_template, session, redirect, request
+from flask import render_template, session, redirect, request, url_for, flash
 from application import app, service
 #    , forms
 from application.forms.basket import AddToBasketForm
 from application.forms.registration import RegistrationForm
+from flask_login import login_user, current_user, login_required, logout_user
+from werkzeug.security import check_password_hash, generate_password_hash
+
+from HybridBakery.application import db
+from HybridBakery.application.forms.loginForm import LoginForm
+from HybridBakery.application.forms.registration import AddressForm
+from HybridBakery.application.models.address import Address
+from HybridBakery.application.models.customer import Customer
+
 
 
 @app.route('/home', methods=['GET'])
@@ -100,4 +109,78 @@ def show_weekly_orders():
     if len(details) == 0:
         error = "There are no orders to display this week :("
     return render_template('weeks_orders.html', order_details=details, message=error)
+
+
+@app.route('/signup')
+def signup():
+    form = RegistrationForm()
+    form2 = AddressForm()   # not sure how to put two forms in render_template
+    return render_template('registration.html', form=form)
+
+
+@app.route('/signup', methods=['POST'])
+def signup_post():
+    email = request.form.get('email')
+    password = request.form.get('password')
+    first_name = request.form.get('first_name')
+    last_name = request.form.get('last_name')
+    phone_number = request.form.get('phone_number')
+
+    first_line = request.form.get('first_line')
+    second_line = request.form.get('second_line')
+    town = request.form.get('town')
+    postcode = request.form.get('postcode')
+
+    customer = Customer.query.filter_by(email=email).first()  # if this returns a user, then the email already exists in database
+
+    if customer:  # if a user is found, we want to redirect back to signup page so user can try again
+        return redirect(url_for('signup'))
+
+    # create a new user with the form data. Hash the password so the plaintext version isn't saved.
+    new_customer = Customer(email=email, pass_word=generate_password_hash(password, method='sha256'), first_name = first_name, last_name=last_name, phone_number=phone_number)
+    new_address = Address(first_line=first_line, second_line=second_line, town=town, postcode=postcode)
+    # add the new user to the database
+    db.session.add(new_customer)
+    db.session.commit()
+    db.session.add(new_address)
+    db.session.commit()
+
+    return redirect(url_for('login'))
+
+@app.route('/profile')
+@login_required
+def profile():
+    return render_template('profile.html', name=current_user.first_name)
+
+
+@app.route('/login')
+def login():
+    form = LoginForm()
+    return render_template('login.html', form=form)
+
+
+@app.route('/login', methods=['POST'])
+def login_post():
+    # login code goes here
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    customer = Customer.query.filter_by(email=email).first()
+    # check if the user actually exists
+    # take the user-supplied password, hash it, and compare it to the hashed password in the database
+    if not customer or not check_password_hash(customer.pass_word, password):
+        flash('Please check your login details and try again.')
+        return redirect(url_for('login')) # if the user doesn't exist or password is wrong, reload the page
+
+    # if the above check passes, then we know the user has the right credentials
+    login_user(customer)
+    return redirect(url_for('profile'))
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
+
 
