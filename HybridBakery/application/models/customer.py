@@ -1,9 +1,10 @@
 from application import db
 from dataclasses import dataclass
+from flask_login import UserMixin
 
 
 @dataclass
-class Customer(db.Model):
+class Customer(UserMixin, db.Model):
     id: int
     first_name: str
     last_name: str
