@@ -93,23 +93,53 @@ def add_product_basket(name):
     # product_name = product_name, filename = filename,# '#
 """
 
+# @app.route('/orders', methods=['GET'])
+# def show_orders():
+#     error = ""
+#     details = service.get_all_orders()
+#     if details is None:
+#         error = "There are no orders to display this week :("
+#     return render_template('orders.html', order_detail=details, message=error)
+#
+#
+# @app.route('/orders/madethisweek', methods=['GET'])
+# def show_weekly_orders():
+#     error = ""
+#     details = service.get_this_weeks_orders()
+#     if len(details) == 0:
+#         error = "There are no orders to display this week :("
+#     return render_template('weeks_orders.html', order_details=details, message=error)
+
+
+# staff view only routes
+
 @app.route('/orders', methods=['GET'])
+@login_required
 def show_orders():
-    error = ""
-    details = service.get_all_orders()
-    if details is None:
-        error = "There are no orders to display this week :("
-    return render_template('orders.html', order_detail=details, message=error)
+    if current_user.user_role == "staff":
+        error = ""
+        details = service.get_all_orders()
+        if details is None:
+            error = "There are no orders to display this week :("
+        return render_template('orders.html', order_detail=details, message=error)
+    elif current_user.user_role == "client":
+        return render_template('home.html')
 
 
 @app.route('/orders/madethisweek', methods=['GET'])
+@login_required
 def show_weekly_orders():
-    error = ""
-    details = service.get_this_weeks_orders()
-    if len(details) == 0:
-        error = "There are no orders to display this week :("
-    return render_template('weeks_orders.html', order_details=details, message=error)
+    if current_user.user_role == "staff":
+        error = ""
+        details = service.get_this_weeks_orders()
+        if len(details) == 0:
+            error = "There are no orders to display this week :("
+        return render_template('weeks_orders.html', order_details=details, message=error)
+    elif current_user.user_role == "client":
+        return render_template('home.html')
 
+
+# signup, profile, login routes
 
 @app.route('/signup')
 def signup():
@@ -144,9 +174,12 @@ def signup_post():
     db.session.add(new_address)
     db.session.commit()
 
-    # create a new user with the form data. Hash the password so the plaintext version isn't saved.
+    # create a new client user with the form data. Hash the password so the plaintext version isn't saved.
+    new_customer = Customer(email=email, pass_word=generate_password_hash(password, method='sha256'), first_name = first_name, last_name=last_name, phone_number=phone_number, home_address_id=new_address.id, billing_address_id=new_address.id, user_role='client')
 
-    new_customer = Customer(email=email, pass_word=generate_password_hash(password, method='sha256'), first_name = first_name, last_name=last_name, phone_number=phone_number, home_address_id=new_address.id, billing_address_id=new_address.id)
+    # The next line of code will register a staff user - comment out the line above to use and signup a staff user to the DB
+    # new_customer = Customer(email=email, pass_word=generate_password_hash(password, method='sha256'), first_name = first_name, last_name=last_name, phone_number=phone_number, home_address_id=new_address.id, billing_address_id=new_address.id, user_role='staff')
+
     # add the new user to the database
     db.session.add(new_customer)
     db.session.commit()
