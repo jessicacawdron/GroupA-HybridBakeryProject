@@ -6,3 +6,4 @@ SQLAlchemy==1.4.35
 cryptography
 flask_wtf
 email_validator
+flask_login
