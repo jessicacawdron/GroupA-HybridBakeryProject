@@ -1,5 +1,7 @@
 from application.models.product import Product
 from application.models.order_detail import Order_detail
+from application.models.allergen import Allergen
+from application.models.product_allergen import ProductAllergen
 from flask import session
 
 
@@ -33,3 +35,12 @@ def get_all_orders():
 def get_this_weeks_orders():
     orders = Order_detail.query.all()
     return orders
+
+def get_product_allergens(product_id):
+    allergens = []
+    product_allergens = ProductAllergen.query.filter_by(product_id=product_id).all()
+    for allergen in product_allergens:
+        a = Allergen.query.filter_by(id=allergen.allergen_id).first()
+        allergens.append(a)
+    #allergenslist = Allergen.query.filter_by(allergen_id=allergens)
+    return allergens

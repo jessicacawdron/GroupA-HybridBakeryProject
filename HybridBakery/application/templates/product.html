@@ -12,17 +12,21 @@
 <!-- this block of content drops into placeholder in layout.html -->
 {% block body_content %}
 <div>
-    <h1>{{product.product_name}}</h1>
-    <div class="text-center">
-        {# code to render dynamic image and image description #}
-        {% set img = '{}.jpg'.format(product.product_name) %}
 
-        <img src="{{ url_for('static', filename='/images/' + img) }}" alt="{{product.product_name}}" />
+    <h2 class="text-center">{{product.product_name}}</h2>
+    <div class="text-center">
+        <!--code to render dynamic image and image description -->
+        {% set img = '{}.jpg'.format(product.product_name) %}
+        <img src="{{ url_for('static', filename='/images/' + img) }}" alt="{{product.product_name}}" class="smallimg"/>
     </div>
 
     <p>{{product.product_description}}</p>
 
     <p class="h2"><span class="badge bg-darkslategrey"> £{{product.price}} </span></p>
+   <p>{% for allergen in allergenslist %}
+   <span class="badge bg-danger">{{allergen.allergen_type}}</span>
+    {% endfor %}</p>
+
     {{ form.content}}
     <form action="/products/{{product.product_name}}" method="post">
         <!--<input type="hidden" value="1" name="{{product.product_name}}">

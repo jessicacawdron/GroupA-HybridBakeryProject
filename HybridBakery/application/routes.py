@@ -6,11 +6,11 @@ from application.forms.registration import RegistrationForm
 from flask_login import login_user, current_user, login_required, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from HybridBakery.application import db
-from HybridBakery.application.forms.loginForm import LoginForm
-from HybridBakery.application.forms.registration import AddressForm
-from HybridBakery.application.models.address import Address
-from HybridBakery.application.models.customer import Customer
+from application import db
+from application.forms.loginForm import LoginForm
+from application.forms.registration import AddressForm
+from application.models.address import Address
+from application.models.customer import Customer
 
 
 @app.route('/home', methods=['GET'])
@@ -74,7 +74,8 @@ def show_product(name, request=request):
         else:
             session["Basket"].append(product.product_name)
         """
-    return render_template('product.html', product=product, form=form)
+    allergenslist = service.get_product_allergens(product.id)
+    return render_template('product.html', product=product, form=form, allergenslist=allergenslist)
     # product_name = product_name, filename = filename,# '#
 
 """
