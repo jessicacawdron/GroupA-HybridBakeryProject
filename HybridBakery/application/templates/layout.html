@@ -12,6 +12,57 @@
 </head>
 <body>
 <!-- navbar from bootstrap will be inherited by all child templates -->
+
+{% if current_user.user_role == "staff" %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: honeydew; color: darkslategrey;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home">Hybrid Bakery</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/products">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/orders">Secret link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/checkout">Checkout</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/profile">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/registration">Register</a>
+        </li>
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="/profile" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            My Hybrid Bakery
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/login">Login</a></li>
+            <li><a class="dropdown-item" href="/registration">Register</a></li>
+            <!-- <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+          </ul>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+{% else %}
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: honeydew; color: darkslategrey;">
   <div class="container-fluid">
     <a class="navbar-brand" href="/home">Hybrid Bakery</a>
@@ -56,6 +107,9 @@
     </div>
   </div>
 </nav>
+
+{% endif %}
+
 {% block body_content %}
 {% endblock %}
 
