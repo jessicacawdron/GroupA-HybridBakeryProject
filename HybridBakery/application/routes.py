@@ -187,10 +187,10 @@ def signup_post():
     db.session.commit()
 
     # create a new client user with the form data. Hash the password so the plaintext version isn't saved.
-    new_customer = Customer(email=email, pass_word=generate_password_hash(password, method='sha256'), first_name = first_name, last_name=last_name, phone_number=phone_number, home_address_id=new_address.id, billing_address_id=new_address.id, user_role='client')
+    #new_customer = Customer(email=email, pass_word=generate_password_hash(password, method='sha256'), first_name = first_name, last_name=last_name, phone_number=phone_number, home_address_id=new_address.id, billing_address_id=new_address.id, user_role='client')
 
     # The next line of code will register a staff user - comment out the line above to use and signup a staff user to the DB
-    # new_customer = Customer(email=email, pass_word=generate_password_hash(password, method='sha256'), first_name = first_name, last_name=last_name, phone_number=phone_number, home_address_id=new_address.id, billing_address_id=new_address.id, user_role='staff')
+    new_customer = Customer(email=email, pass_word=generate_password_hash(password, method='sha256'), first_name = first_name, last_name=last_name, phone_number=phone_number, home_address_id=new_address.id, billing_address_id=new_address.id, user_role='staff')
 
     # add the new user to the database
     db.session.add(new_customer)
@@ -204,6 +204,10 @@ def signup_post():
 def profile():
     return render_template('profile.html', title='Profile', name=current_user.first_name)
 
+@app.route('/myorders')
+@login_required
+def show_my_orders():
+    return render_template('myorders.html', title='My Orders', name=current_user.first_name)
 
 @app.route('/login')
 def login():
