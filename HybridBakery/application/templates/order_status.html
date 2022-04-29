@@ -1,26 +1,16 @@
 <!-- inherits from layout.html template -->
 {% extends "layout.html" %}
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Orders Page</title>
+    <title>Order status</title>
 </head>
 <body>
 
 <!-- this block of content drops into placeholder in layout.html -->
 {% block body_content %}
-<h1> All Orders</h1>
-<h4>See orders from: </h4>
-<button><a href="/orders/date/week">This week</a></button>
-<button><a href="/orders/date/month">This month</a></button>
-<button><a href="/orders/date/year">This year</a></button>
-
-<h4>See orders by status: </h4>
-<button><a href="/orders/status/processing">Processing</a></button>
-<button><a href="/orders/status/confirmed">Confirmed</a></button>
-<button><a href="/orders/status/despatched">Despatched</a></button>
-<button><a href="/orders/status/delivered">Delivered</a></button>
+<h1> Order status {{ status }}</h1>
 <div>
     <table class="table">
   <thead class = "thead-light">

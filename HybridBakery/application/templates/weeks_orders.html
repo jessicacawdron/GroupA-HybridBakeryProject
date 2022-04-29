@@ -10,7 +10,7 @@
 
 <!-- this block of content drops into placeholder in layout.html -->
 {% block body_content %}
-<h1> Orders This Week - is this useful?</h1>
+<h1> Orders this {{time}} </h1>
 <div>
 {% for order_detail in order_detail %}
    <p>{{order_detail.order_date}} {{order_detail.order_status}} {{order_detail.order_value}}</p>
