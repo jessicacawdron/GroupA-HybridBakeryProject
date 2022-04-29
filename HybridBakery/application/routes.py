@@ -126,15 +126,27 @@ def show_orders():
         return render_template('home.html')
 
 
-@app.route('/orders/madethisweek', methods=['GET'])
+@app.route('/orders/date/<time>', methods=['GET'])
 @login_required
-def show_weekly_orders():
+def show_orders_by_date(time):
     if current_user.user_role == "staff":
         error = ""
-        details = service.get_this_weeks_orders()
+        details = service.get_orders_by_date(time)
         if len(details) == 0:
             error = "There are no orders to display this week :("
-        return render_template('weeks_orders.html', order_details=details, message=error)
+        return render_template('weeks_orders.html', order_detail=details, time=time, message=error)
+    elif current_user.user_role == "client":
+        return render_template('home.html')
+
+@app.route('/orders/status/<order_status>', methods=['GET'])
+@login_required
+def show_orders_by_status(order_status):
+    if current_user.user_role == "staff":
+        error = ""
+        details = service.get_orders_by_status(order_status)
+        if details is None:
+            error = "There are no orders to display"
+        return render_template('order_status.html', order_detail=details, message=error)
     elif current_user.user_role == "client":
         return render_template('home.html')
 
