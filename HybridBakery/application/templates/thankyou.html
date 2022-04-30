@@ -1,0 +1,22 @@
+<!-- inherits from layout.html template -->
+{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thank You</title>
+</head>
+<body>
+<!-- this block of content drops into placeholder in layout.html -->
+{% block body_content %}
+<div>
+<h1>Thank You</h1>
+
+  <h2>We have received your payment of  <strong>£{{"{:.2f}".format(checkout_total)}}</strong></h2>
+<p>We aim to deliver all orders within 48 hours. Please don't hesitate to contact us with any questions.</p>
+
+
+</div>
+{% endblock %}
+</body>
+</html>

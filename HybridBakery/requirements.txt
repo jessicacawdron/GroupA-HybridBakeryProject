@@ -7,3 +7,5 @@ cryptography
 flask_wtf
 email_validator
 flask_login
+stripe
+python-dotenv

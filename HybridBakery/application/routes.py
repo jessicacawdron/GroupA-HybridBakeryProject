@@ -11,7 +11,7 @@ from application.forms.loginForm import LoginForm
 from application.forms.registration import AddressForm
 from application.models.address import Address
 from application.models.customer import Customer
-
+import os
 
 @app.route('/home', methods=['GET'])
 def welcome():
@@ -31,13 +31,37 @@ def show_products():
 def show_basket():
     checkout_total= float(0.00)
     error = ""
+    stripe_keys = {
+        'secret_key': os.environ['STRIPE_SECRET_KEY'],
+        'publishable_key': os.environ['STRIPE_PUBLISHABLE_KEY']
+    }
     products = service.get_checkout_products()
     if len(products) == 0:
         error = "There is nothing in your basket"
     for product in products:
         checkout_total += float(product.total)
-    return render_template('checkout.html', products=products, checkout_total=checkout_total, message=error)
+    return render_template('checkout.html', products=products, checkout_total=checkout_total, message=error, key=stripe_keys['publishable_key'])
 
+"""retired as added unnecessary extra step
+@app.route('/payment')
+def index():
+    return render_template('payment.html',key=stripe_keys['publishable_key'])
+"""
+
+@app.route('/thankyou', methods=['POST'])
+def thankyou():
+    amount = checkout_total
+    customer = stripe.Customer.create(
+        email='sample@customer.com',
+        source=request.form['stripeToken']
+    )
+    stripe.Charge.create(
+        customer=customer.id,
+        amount=amount,
+        currency='gbp',
+        description='Hybrid Bakery Payment'
+    )
+    return render_template('thankyou.html', amount=amount)
 
 @app.route('/registration', methods=['GET','POST'])
 def register():
