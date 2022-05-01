@@ -63,3 +63,6 @@ def get_product_allergens(product_id):
         allergens.append(a)
     #allergenslist = Allergen.query.filter_by(allergen_id=allergens)
     return allergens
+
+def get_my_orders(current_user):
+    return Order_detail.query.filter_by(customer_id=current_user.id).all()
