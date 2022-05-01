@@ -6,12 +6,12 @@ from application.forms.registration import RegistrationForm
 from flask_login import login_user, current_user, login_required, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from HybridBakery.application import db
-from HybridBakery.application.forms.loginForm import LoginForm
-from HybridBakery.application.forms.registration import AddressForm
-from HybridBakery.application.models.address import Address
-from HybridBakery.application.models.customer import Customer
-
+from application import db
+from application.forms.loginForm import LoginForm
+from application.forms.registration import AddressForm
+from application.models.address import Address
+from application.models.customer import Customer
+import os
 
 @app.route('/home', methods=['GET'])
 def welcome():
@@ -31,13 +31,37 @@ def show_products():
 def show_basket():
     checkout_total= float(0.00)
     error = ""
+    stripe_keys = {
+        'secret_key': os.environ['STRIPE_SECRET_KEY'],
+        'publishable_key': os.environ['STRIPE_PUBLISHABLE_KEY']
+    }
     products = service.get_checkout_products()
     if len(products) == 0:
         error = "There is nothing in your basket"
     for product in products:
         checkout_total += float(product.total)
-    return render_template('checkout.html', products=products, checkout_total=checkout_total, message=error)
+    return render_template('checkout.html', products=products, checkout_total=checkout_total, message=error, key=stripe_keys['publishable_key'])
 
+"""retired as added unnecessary extra step
+@app.route('/payment')
+def index():
+    return render_template('payment.html',key=stripe_keys['publishable_key'])
+"""
+
+@app.route('/thankyou', methods=['POST'])
+def thankyou():
+    amount = checkout_total
+    customer = stripe.Customer.create(
+        email='sample@customer.com',
+        source=request.form['stripeToken']
+    )
+    stripe.Charge.create(
+        customer=customer.id,
+        amount=amount,
+        currency='gbp',
+        description='Hybrid Bakery Payment'
+    )
+    return render_template('thankyou.html', amount=amount)
 
 @app.route('/registration', methods=['GET','POST'])
 def register():
@@ -74,7 +98,8 @@ def show_product(name, request=request):
         else:
             session["Basket"].append(product.product_name)
         """
-    return render_template('product.html', product=product, form=form)
+    allergenslist = service.get_product_allergens(product.id)
+    return render_template('product.html', product=product, form=form, allergenslist=allergenslist)
     # product_name = product_name, filename = filename,# '#
 
 """
@@ -92,23 +117,65 @@ def add_product_basket(name):
     # product_name = product_name, filename = filename,# '#
 """
 
+# @app.route('/orders', methods=['GET'])
+# def show_orders():
+#     error = ""
+#     details = service.get_all_orders()
+#     if details is None:
+#         error = "There are no orders to display this week :("
+#     return render_template('orders.html', order_detail=details, message=error)
+#
+#
+# @app.route('/orders/madethisweek', methods=['GET'])
+# def show_weekly_orders():
+#     error = ""
+#     details = service.get_this_weeks_orders()
+#     if len(details) == 0:
+#         error = "There are no orders to display this week :("
+#     return render_template('weeks_orders.html', order_details=details, message=error)
+
+
+# staff view only routes
+
 @app.route('/orders', methods=['GET'])
+@login_required
 def show_orders():
-    error = ""
-    details = service.get_all_orders()
-    if details is None:
-        error = "There are no orders to display this week :("
-    return render_template('orders.html', order_detail=details, message=error)
+    if current_user.user_role == "staff":
+        error = ""
+        details = service.get_all_orders()
+        if details is None:
+            error = "There are no orders to display this week :("
+        return render_template('orders.html', order_detail=details, message=error)
+    elif current_user.user_role == "client":
+        return render_template('home.html')
 
 
-@app.route('/orders/madethisweek', methods=['GET'])
-def show_weekly_orders():
-    error = ""
-    details = service.get_this_weeks_orders()
-    if len(details) == 0:
-        error = "There are no orders to display this week :("
-    return render_template('weeks_orders.html', order_details=details, message=error)
+@app.route('/orders/date/<time>', methods=['GET'])
+@login_required
+def show_orders_by_date(time):
+    if current_user.user_role == "staff":
+        error = ""
+        details = service.get_orders_by_date(time)
+        if len(details) == 0:
+            error = "There are no orders to display this week :("
+        return render_template('weeks_orders.html', order_detail=details, time=time, message=error)
+    elif current_user.user_role == "client":
+        return render_template('home.html')
 
+@app.route('/orders/status/<order_status>', methods=['GET'])
+@login_required
+def show_orders_by_status(order_status):
+    if current_user.user_role == "staff":
+        error = ""
+        details = service.get_orders_by_status(order_status)
+        if details is None:
+            error = "There are no orders to display"
+        return render_template('order_status.html', order_detail=details, message=error)
+    elif current_user.user_role == "client":
+        return render_template('home.html')
+
+
+# signup, profile, login routes
 
 @app.route('/signup')
 def signup():
@@ -143,9 +210,12 @@ def signup_post():
     db.session.add(new_address)
     db.session.commit()
 
-    # create a new user with the form data. Hash the password so the plaintext version isn't saved.
+    # create a new client user with the form data. Hash the password so the plaintext version isn't saved.
+    #new_customer = Customer(email=email, pass_word=generate_password_hash(password, method='sha256'), first_name = first_name, last_name=last_name, phone_number=phone_number, home_address_id=new_address.id, billing_address_id=new_address.id, user_role='client')
 
-    new_customer = Customer(email=email, pass_word=generate_password_hash(password, method='sha256'), first_name = first_name, last_name=last_name, phone_number=phone_number, home_address_id=new_address.id, billing_address_id=new_address.id)
+    # The next line of code will register a staff user - comment out the line above to use and signup a staff user to the DB
+    new_customer = Customer(email=email, pass_word=generate_password_hash(password, method='sha256'), first_name = first_name, last_name=last_name, phone_number=phone_number, home_address_id=new_address.id, billing_address_id=new_address.id, user_role='staff')
+
     # add the new user to the database
     db.session.add(new_customer)
     db.session.commit()
@@ -158,6 +228,14 @@ def signup_post():
 def profile():
     return render_template('profile.html', title='Profile', name=current_user.first_name)
 
+@app.route('/myorders')
+@login_required
+def show_my_orders():
+    error = ""
+    details = service.get_my_orders(current_user)
+    if details is None:
+        error = "You have no orders to display. Why not take a look at our products for inspiration?"
+    return render_template('myorders.html', title='My Orders', order_detail=details, name=current_user.first_name, message=error)
 
 @app.route('/login')
 def login():

@@ -1,8 +1,16 @@
-nav{
+/*nav{
     font-size: 16t;
     font-family: "helvetica", sans-serif;
     color: darkslategrey;
 }
+
+.nav-link{
+    color: darkslategrey;
+}
+
+.navbar-brand{
+    color: darkslategrey;
+}*/
 body{
     font-size: 16pt;
     font-family:"gill sans", "helvetica", sans-serif;

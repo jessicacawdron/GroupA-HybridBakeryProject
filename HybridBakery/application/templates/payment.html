@@ -40,16 +40,6 @@
    <TD class="c4">£{{"{:.2f}".format(checkout_total)}}</TD>
 </TR>
     </table>
-<h3>Buy for £{{"{:.2f}".format(checkout_total)}}</h3>
-<form action="/checkout" method="post">
-      <script
-        src="https://checkout.stripe.com/checkout.js"
-        class="stripe-button"
-        data-key="{{ key }}"
-        data-description="Hybrid Bakery Payment"
-        data-amount="({{checkout_total}}*100)"
-        data-locale="auto">
-      </script>
 </div>
 {% endblock %}
 </body>
