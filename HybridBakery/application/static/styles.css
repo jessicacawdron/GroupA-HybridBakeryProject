@@ -56,3 +56,96 @@ th, td {
   .bg-darkslategrey{
   background-color: darkslategrey;
   color: white;}
+
+
+.card{
+    background-color: #E2DFD2;
+    font-color: #6B7D7D;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #6B7D7D;
+}
+
+.card-title {
+    font-size: 1vw;
+    font-style: bold;
+    text-align: center;
+}
+
+.card-image{
+    position:relative;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.card:hover .image-overlay {
+  opacity: 1;
+}
+
+.product-text {
+  color: white;
+  font-size: 1vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.product-btn {
+  border-radius: 4px;
+  background-color: #F0FFF0;
+  border: 2px solid #2D364D;
+  color: #2D364D;
+  text-align: center;
+  font-size: 1vw;
+  padding: 10px;
+  width: 80%;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.product-btn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.product-btn span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+  color: #E2DFD2;
+}
+
+.product-btn:hover span {
+  padding-right: 25px;
+  color: #E2DFD2;
+}
+
+.product-btn:hover span:after {
+  opacity: 1;
+  right: 0;
+  color: #E2DFD2;
+}
+.product-btn:hover {
+  background-color: #C1958C;
+}

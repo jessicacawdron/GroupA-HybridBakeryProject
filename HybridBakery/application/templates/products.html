@@ -5,33 +5,82 @@
 <head>
     <meta charset="UTF-8">
     <title>Product Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='spinner.css') }}">
 </head>
 <body>
-
 <!-- this block of content drops into placeholder in layout.html -->
 {% block body_content %}
-<h1> Our Full Product Range</h1>
-<div>
-    <table class="table">
-  <thead class = "thead-light">
-    <tr>
-      <th scope="col">Product</th>
-      <th scope="col">Price</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-{% for product in product %}
-<TR>
-   <!-- add images? <TD class="c1"><IMG src="favicon.ico"></TD> -->
-   <TD class="c1"><a href="/products/{{product.product_name}}">{{product.product_name}}</a></TD>
-   <TD class="c2">£{{product.price}}</TD>
-   <TD class="c3"><SPAN>{{product.product_description}}</SPAN></TD>
-</TR>
+<h1 style="color:#2D364D"><b> Bakery Products </b></h1>
+<!--<div>-->
+<!--    <table class="table">-->
+<!--  <thead class = "thead-light">-->
+<!--    <tr>-->
+<!--      <th scope="col">Product</th>-->
+<!--      <th scope="col">Price</th>-->
+<!--      <th scope="col">Description</th>-->
+<!--    </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--{% for product in product %}-->
+<!--<TR>-->
+<!--   &lt;!&ndash; add images? <TD class="c1"><IMG src="favicon.ico"></TD> &ndash;&gt;-->
+<!--   <TD class="c1"><a href="/products/{{product.product_name}}">{{product.product_name}}</a></TD>-->
+<!--   <TD class="c2">£{{product.price}}</TD>-->
+<!--   <TD class="c3"><SPAN>{{product.product_description}}</SPAN></TD>-->
+<!--</TR>-->
 
-{% endfor %}
-    </table>
+<!--{% endfor %}-->
+<!--    </table>-->
+<!--</div>-->
+
+<div class="product-container">
+    <div class="row">
+        {% for product in product %}
+        {% set img = '{}.jpg'.format(product.product_name) %}
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="{{ url_for('static', filename='/images/' + img) }}" alt="{{product.product_name}}" class="card-img-top"  style="height: 10%">
+                    <div class="image-overlay">
+                        <div class="product-text">{{product.product_description}}</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card-title">
+                                {{product.product_name}}<br>£{{product.price}}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <a href="/products/{{product.product_name}}" class="btn product-btn"><span>View Product</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
+<!--<div class="product-spinner">-->
+<!--    <button id="spin">Spin</button>-->
+<!--    <span class="arrow"></span>-->
+<!--    <div class="spinner-container">-->
+<!--        <div class="one">Townie</div>-->
+<!--        <div class="two">Biskie</div>-->
+<!--        <div class="three">Cruffin</div>-->
+<!--        <div class="four">Cretzel</div>-->
+<!--        <div class="five">Cronut</div>-->
+<!--        <div class="six">Brookie</div>-->
+<!--        <div class="seven">Wonut</div>-->
+<!--        <div class="eight">Duffin</div>-->
+<!--        <div class="nine">Cheekie</div>-->
+<!--        <div class="ten">Crookie</div>-->
+<!--        <div class="eleven">Bruffin</div>-->
+<!--        <div class="twelve">Cragel</div>-->
+<!--    </div>-->
+<!--    <script src="{{ url_for('static', filename='spinner.js') }}"></script>-->
+<!--</div>-->
 {% endblock %}
 </body>
 </html>
