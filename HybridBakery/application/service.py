@@ -2,6 +2,7 @@ from application.models.product import Product
 from application.models.order_detail import Order_detail
 from application.models.allergen import Allergen
 from application.models.product_allergen import ProductAllergen
+from application.models.address import Address
 from flask import session
 
 
@@ -66,3 +67,5 @@ def get_product_allergens(product_id):
 
 def get_my_orders(current_user):
     return Order_detail.query.filter_by(customer_id=current_user.id).all()
+
+

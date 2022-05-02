@@ -235,7 +235,7 @@ def show_my_orders():
     details = service.get_my_orders(current_user)
     if details is None:
         error = "You have no orders to display. Why not take a look at our products for inspiration?"
-    return render_template('myorders.html', title='My Orders', order_detail=details, name=current_user.first_name, message=error)
+    return render_template('myorders.html', title='My Orders', order_detail=details, name=current_user.first_name, message=error, number=current_user.id)
 
 @app.route('/login')
 def login():
