@@ -1,4 +1,5 @@
 from application import db
+from application.models.address import Address
 from dataclasses import dataclass
 
 
@@ -19,3 +20,6 @@ class Order_detail(db.Model):
     order_status = db.Column(db.String(35), nullable=False)
     delivery_address_id = db.Column(db.Integer, db.ForeignKey("address.id"), nullable=False)
     delivery_recipient = db.Column(db.String(100), nullable=False)
+    def get_delivery_address(self):
+        return Address.query.filter_by(id=self.delivery_address_id).first()
+
