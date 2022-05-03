@@ -13,9 +13,41 @@ from application.models.address import Address
 from application.models.customer import Customer
 import os
 
+from HybridBakery.application.forms.enquiryForm import EnquiryForm
+from HybridBakery.application.models.enquiry import Enquiry
+
+
 @app.route('/home', methods=['GET'])
 def welcome():
-    return render_template('home.html')
+    form = EnquiryForm()
+    return render_template('home.html', title='Home', form=form)
+
+
+@app.route('/home', methods=['GET', 'POST'])
+def welcome_post():
+    if request.method == 'POST':
+        form = EnquiryForm(request.form)
+
+        email_enquiry = form.email_enquiry.data
+        full_name = form.full_name.data
+        message = form.message.data
+
+        customer = Customer.query.filter_by(email=email_enquiry).first()  # if this returns a user, then the email already exists in database
+
+    if customer:
+        new_enquiry = Enquiry(email_enquiry=email_enquiry, full_name=full_name, message=message,
+                              email_id=customer.id)
+        db.session.add(new_enquiry)
+        db.session.commit()
+        flash(f'Thanks for your enquiry {full_name}, we will be in touch shortly!')
+        return redirect(url_for('welcome'))
+
+    else:
+        new_enquiry = Enquiry(email_enquiry=email_enquiry, full_name=full_name, message=message)
+        db.session.add(new_enquiry)
+        db.session.commit()
+        flash(f'Thanks for your enquiry {full_name}, we will be in touch shortly!')
+        return redirect(url_for('welcome'))
 
 
 @app.route('/products', methods=['GET'])
