@@ -4,141 +4,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Error Page</title>
+    <title>Home Page</title>
 </head>
-    <body>
+<body>
 
 <!-- this block of content drops into placeholder in layout.html -->
 {% block body_content %}
-
-
-<header>
-    <h1> Welcome to Hybrid Bakery </h1>
-
-
-    <!-- Background image -->
-    <div id="intro" class="bg-image shadow-2-strong">
-      <div class="mask" style="background-color: rgba(0, 0, 0, 0.8);">
-        <div class="container d-flex align-items-center justify-content-center text-center h-100">
-          <div class="text-white">
-          </div>
+<div class="section1">
+    <div class="row">
+        <div class="col-md-6 gx-5 mb-4" style="text-align:right;">
+            <img src="{{ url_for('static', filename='/images/bakery1.jpg') }}" class="img-fluid" />
         </div>
-      </div>
+        <div class="col-md-4 gx-5 mb-4">
+            <div class="aboutus">
+                <p style="font-size:12px">ABOUT US
+                </p>
+                <h2 style="font-weight:bold;">OUR LITTLE BAKERY
+                    <span style="color:#C1958C; ">BREAKING THE MOULD</span>
+                </h2>
+                <p>Here at Hybrid Bakery we are proud to offer a range of unique, tasty bakes.<br>
+                    All our products are made fresh on site and we offer vegan options on all our bakes.<br></p>
+            </div>
+        </div>
+        <div class="col-md-2 gx-5 mb-4">
+        </div>
     </div>
-    <!-- Background image -->
-  </header>
-  <!--Main Navigation-->
-
-  <!--Main layout-->
-  <main class="mt-5">
-    <div class="container">
-      <!--Section: Content-->
-      <section>
-        <div class="row">
-          <div class="col-md-6 gx-5 mb-4">
-            <div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
-              <img src="https://mdbootstrap.com/img/new/slides/031.jpg" class="img-fluid" />
-              <a href="#!">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </a>
-            </div>
-          </div>
-
-
-      <hr class="my-5" />
-
-
-        <div class="row">
-          <div class="col-lg-4 col-md-12 mb-4">
-            <div class="card">
-              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" class="img-fluid" />
-                <a href="#!">
-                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card">
-              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img src="https://mdbootstrap.com/img/new/standard/nature/023.jpg" class="img-fluid" />
-                <a href="#!">
-                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card">
-              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img src="https://mdbootstrap.com/img/new/standard/nature/111.jpg" class="img-fluid" />
-                <a href="#!">
-                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </a>
-              </div>
-            </div>
-          </div>
+</div>
+<hr>
+<div class="section2">
+    <div class="row">
+    <img src="{{ url_for('static', filename='/images/bakery3.jpeg') }}" class="img-fluid" />
+    <!--    <div class="container">-->
+    <!--        <img class="home-s2-img" src="{{ url_for('static', filename='/images/bakery3.jpeg') }}" />-->
+    <!--        <div class="s2-img-overlay">-->
+    <!--            <div class="discover-text">Our bakes combine well known deserts and pastry types such as-->
+    <!--                the Cronut - a croissant and donut cross, or the Townie - a tart and brownie mix.</div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</div>-->
         </div>
-      </section>
-      <!--Section: Content-->
-
-      <hr class="my-5" />
-
-
-              <!-- Email input -->
-              <div class="form-outline mb-4">
-                <input type="email" id="form3Example3" class="form-control" />
-                <label class="form-label" for="form3Example3">Email address</label>
-              </div>
-
-              <!-- Password input -->
-              <div class="form-outline mb-4">
-                <input type="password" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Password</label>
-              </div>
-
-              <!-- Checkbox -->
-              <div class="form-check d-flex justify-content-center mb-4">
-                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" checked />
-                <label class="form-check-label" for="form2Example3">
-                  Subscribe to fresh stock email alerts
-                </label>
-              </div>
-
-              <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4">
-                Sign up
-              </button>
-
-              <!-- Register buttons -->
-              <div class="text-center">
-                <p>or sign up with:</p>
-                <button type="button" class="btn btn-primary btn-floating mx-1">
-                  <i class="fab fa-facebook-f"></i>
-                </button>
-
-                <button type="button" class="btn btn-primary btn-floating mx-1">
-                  <i class="fab fa-google"></i>
-                </button>
-
-                <button type="button" class="btn btn-primary btn-floating mx-1">
-                  <i class="fab fa-twitter"></i>
-                </button>
-
-                <button type="button" class="btn btn-primary btn-floating mx-1">
-                  <i class="fab fa-github"></i>
-                </button>
-              </div>
-            </form>
-          </div>
+</div>
+    <hr>
+    <div class="section3">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active p-4">
+                    <p class="d-block w-100" >
+                        I ordered a mix of bakes for my friends baby shower, we couldn't believe how yummy everything was!<br>
+                        They were so accommodating with such a large order too. We will definitely order again.<br>
+                        Miss Brown</p>
+                </div>
+                <div class="carousel-item p-4">
+                    <p class="d-block w-100">
+                        Hybrid Bakery is my favourite! Everything is always so fresh.<br>
+                        I can't resist popping in on my lunch breaks!<br>
+                        Sally Scott</p>
+                </div>
+                <div class="carousel-item p-4">
+                    <p class="d-block w-100">
+                        As a vegan it can be hard to find taste bakes<br>
+                        but the Hybrid Bakery vegan bakes are amazing - they're my go to!<br>
+                        Tom Hope</p>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-      </section>
-      <!--Section: Content-->
     </div>
-  </main>
 
 {% endblock %}
     </body>

@@ -10,29 +10,7 @@
 <body>
 <!-- this block of content drops into placeholder in layout.html -->
 {% block body_content %}
-<h1 style="color:#2D364D"><b> Bakery Products </b></h1>
-<!--<div>-->
-<!--    <table class="table">-->
-<!--  <thead class = "thead-light">-->
-<!--    <tr>-->
-<!--      <th scope="col">Product</th>-->
-<!--      <th scope="col">Price</th>-->
-<!--      <th scope="col">Description</th>-->
-<!--    </tr>-->
-<!--  </thead>-->
-<!--  <tbody>-->
-<!--{% for product in product %}-->
-<!--<TR>-->
-<!--   &lt;!&ndash; add images? <TD class="c1"><IMG src="favicon.ico"></TD> &ndash;&gt;-->
-<!--   <TD class="c1"><a href="/products/{{product.product_name}}">{{product.product_name}}</a></TD>-->
-<!--   <TD class="c2">£{{product.price}}</TD>-->
-<!--   <TD class="c3"><SPAN>{{product.product_description}}</SPAN></TD>-->
-<!--</TR>-->
-
-<!--{% endfor %}-->
-<!--    </table>-->
-<!--</div>-->
-
+<h1 style="color:#1E2433"><b> Bakery Products </b></h1>
 <div class="product-container">
     <div class="row">
         {% for product in product %}
@@ -81,6 +59,7 @@
 <!--    </div>-->
 <!--    <script src="{{ url_for('static', filename='spinner.js') }}"></script>-->
 <!--</div>-->
+
 {% endblock %}
 </body>
 </html>

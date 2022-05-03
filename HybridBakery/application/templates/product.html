@@ -11,31 +11,31 @@
 <body>
 <!-- this block of content drops into placeholder in layout.html -->
 {% block body_content %}
-<div>
-
-    <h2 class="text-center">{{product.product_name}}</h2>
-    <div class="text-center">
-        <!--code to render dynamic image and image description -->
-        {% set img = '{}.jpg'.format(product.product_name) %}
-        <img src="{{ url_for('static', filename='/images/' + img) }}" alt="{{product.product_name}}" class="smallimg"/>
+<div class="product-details">
+    <div Class="row">
+        <div Class="col-md-6">
+            {% set img = '{}.jpg'.format(product.product_name) %}
+            <img src="{{ url_for('static', filename='/images/' + img) }}" alt="{{product.product_name}}" class="img1"/>
+        </div>
+        <div Class="col-md-6 info">
+            <p Class="product-title">{{product.product_name}}</p>
+            <br>
+            <p> £{{product.price}}</p>
+            <p>{{product.product_description}}</p>
+            <br>
+            <p>{% for allergen in allergenslist %}
+                <span class="badge bg-danger">{{allergen.allergen_type}}</span>
+                {% endfor %}
+                {% if ("Milk" or "Eggs") not in allergenslist %}
+                <span class="badge bg-success">Vegan Option Available</span>
+                {% endif %} </p><br>
+            {{ form.content}}
+            <form action="/products/{{product.product_name}}" method="post">
+                {{form.quantity.label}} {{form.quantity(size=2)}} {{form.submit}}
+            </form>
+        </div>
     </div>
-
-    <p>{{product.product_description}}</p>
-
-    <p class="h2"><span class="badge bg-darkslategrey"> £{{product.price}} </span></p>
-   <p>{% for allergen in allergenslist %}
-   <span class="badge bg-danger">{{allergen.allergen_type}}</span>
-    {% endfor %}
-    {% if ("Milk" or "Eggs") not in allergenslist %}
-    <span class="badge bg-success">Vegan Option Available</span>
-       {% endif %} </p>
-
-    {{ form.content}}
-    <form action="/products/{{product.product_name}}" method="post">
-        <!--<input type="hidden" value="1" name="{{product.product_name}}">
-        <input type="submit" value="Add to basket"> -->
-        {{form.quantity.label}} {{form.quantity(size=2)}} {{form.submit}}
-    </form>
+</div>
 
 {% endblock %}
 </body>
