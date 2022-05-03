@@ -47,7 +47,7 @@ def welcome_post():
         db.session.add(new_enquiry)
         db.session.commit()
         flash(f'Thanks for your enquiry {full_name}, we will be in touch shortly!')
-        return redirect(url_for('home'))
+        return redirect(url_for('welcome'))
 
 
 @app.route('/products', methods=['GET'])
