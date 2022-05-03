@@ -2,8 +2,10 @@ from application.models.product import Product
 from application.models.order_detail import Order_detail
 from application.models.allergen import Allergen
 from application.models.product_allergen import ProductAllergen
+from application.models.customer import Customer
 from application.models.address import Address
 from flask import session
+from random import randint
 
 
 # putting this script here for future use as will need sessions when we ask users to log in
@@ -67,5 +69,12 @@ def get_product_allergens(product_id):
 
 def get_my_orders(current_user):
     return Order_detail.query.filter_by(customer_id=current_user.id).all()
+
+def get_my_profile(current_user):
+    return Customer.query.filter_by(id=current_user.id).all()
+
+def get_random():
+    rand_num = randint(1,10)
+    return rand_num
 
 

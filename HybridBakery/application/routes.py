@@ -10,11 +10,12 @@ from application import db
 from application.forms.loginForm import LoginForm
 from application.forms.registration import AddressForm
 from application.models.address import Address
+from application.models.product import Product
 from application.models.customer import Customer
 import os
 
-from HybridBakery.application.forms.enquiryForm import EnquiryForm
-from HybridBakery.application.models.enquiry import Enquiry
+from application.forms.enquiryForm import EnquiryForm
+from application.models.enquiry import Enquiry
 
 
 @app.route('/home', methods=['GET'])
@@ -258,7 +259,10 @@ def signup_post():
 @app.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html', title='Profile', name=current_user.first_name)
+    details = service.get_my_profile(current_user)
+    recommendation = service.get_random()
+    product = service.get_product(recommendation)
+    return render_template('profile.html', customer=details, title='Profile', name=current_user.first_name, number=current_user.id, phone=current_user.phone_number, email=current_user.email, product = product )
 
 @app.route('/myorders')
 @login_required

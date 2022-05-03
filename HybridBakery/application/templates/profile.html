@@ -2,6 +2,37 @@
 
 {% block body_content %}
 <h1 class="title">
-  Welcome, {{ name }}!
+  {{ name }}'s Profile
 </h1>
+<div>
+  <p>Your customer number: {{number}}</p>
+  <p>Your contact telephone number: {{phone}} <button type="button" class="btn btn-outline-secondary">edit</button></p>
+  <p>Your e-mail address: {{email}} <button type="button" class="btn btn-outline-secondary">edit</button></p>
+  <p>Your marketing preferences: Please keep me updated by e-mail and text <button type="button" class="btn btn-outline-secondary">edit</button></p>
+  <p>Our random recommendation for you today:</p>
+</div>
+{% set img = '{}.jpg'.format(product.product_name) %}
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="{{ url_for('static', filename='/images/' + img) }}" alt="{{product.product_name}}" class="card-img-top"  style="height: 10%">
+                    <div class="image-overlay">
+                        <div class="product-text">{{product.product_description}}</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card-title">
+                                {{product.product_name}}<br>£{{product.price}}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <a href="/products/{{product.product_name}}" class="btn product-btn"><span>View Product</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 {% endblock %}
