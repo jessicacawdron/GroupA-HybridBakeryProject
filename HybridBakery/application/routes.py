@@ -275,16 +275,14 @@ def signup_post():
 @app.route('/profile')
 @login_required
 def profile():
-    details = service.get_my_profile(current_user)
-    recommendation = service.get_random()
-    product = service.get_product(recommendation)
-    return render_template('profile.html', customer=details, title='Profile', name=current_user.first_name, number=current_user.id, phone=current_user.phone_number, email=current_user.email, product = product )
-
-@app.route('/staffprofile')
-@login_required
-def staffprofile():
-    details = service.get_my_profile(current_user)
-    return render_template('staffprofile.html', customer=details, title='Profile', name=current_user.first_name, number=current_user.id, phone=current_user.phone_number, email=current_user.email )
+    if current_user.user_role == "client":
+        details = service.get_my_profile(current_user)
+        recommendation = service.get_random()
+        product = service.get_product(recommendation)
+        return render_template('profile.html', customer=details, title='Profile', name=current_user.first_name, number=current_user.id, phone=current_user.phone_number, email=current_user.email, product = product )
+    elif current_user.user_role == "staff":
+        details = service.get_my_profile(current_user)
+        return render_template('staffprofile.html', customer=details, title='Profile', name=current_user.first_name, number=current_user.id, phone=current_user.phone_number, email=current_user.email )
 
 
 @app.route('/myorders')
