@@ -4,6 +4,7 @@ from application.models.allergen import Allergen
 from application.models.product_allergen import ProductAllergen
 from application.models.customer import Customer
 from application.models.address import Address
+from application.models.enquiry import Enquiry
 from flask import session
 from random import randint
 
@@ -13,6 +14,8 @@ from random import randint
 #Session = sessionmaker(bind=engine)
 #session = Session()
 from flask_login import current_user
+
+
 
 
 def get_products():
@@ -45,17 +48,21 @@ def get_all_orders():
 
 def get_orders_by_date(time):
     if time == 'week':
-        orders_by_date = Order_detail.query.filter(Order_detail.order_date.between('2022-04-28', '2022-05-05')).all()
+        orders_by_date = Order_detail.query.filter(Order_detail.order_date.between('2022-04-28', '2022-05-05')).order_by(Order_detail.order_date.desc())
     elif time == 'month':
-        orders_by_date = Order_detail.query.filter(Order_detail.order_date.between('2022-04-05', '2022-05-05')).all()
+        orders_by_date = Order_detail.query.filter(Order_detail.order_date.between('2022-04-05', '2022-05-05')).order_by(Order_detail.order_date.desc())
     elif time == 'year':
-        orders_by_date = Order_detail.query.filter(Order_detail.order_date.between('2021-05-05', '2022-05-05')).all()
+        orders_by_date = Order_detail.query.filter(Order_detail.order_date.between('2021-05-05', '2022-05-05')).order_by(Order_detail.order_date.desc())
     return orders_by_date
 
 
 def get_orders_by_status(order_status):
-    orders_by_status = Order_detail.query.filter_by(order_status=order_status).all()
+    orders_by_status = Order_detail.query.filter_by(order_status=order_status).order_by(Order_detail.order_date.desc())
     return orders_by_status
+
+
+def get_enquiries():
+    return Enquiry.query.order_by(Enquiry.id.desc())
 
 
 def get_product_allergens(product_id):

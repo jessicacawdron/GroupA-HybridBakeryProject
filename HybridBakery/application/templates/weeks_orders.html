@@ -12,12 +12,37 @@
 {% block body_content %}
 <h1> Orders this {{time}} </h1>
 <div>
+    <table class="table">
+  <thead class = "thead-light">
+    <tr>
+      <th scope="col">Order Number</th>
+      <th scope="col">Customer Number</th>
+      <th scope="col">Value</th>
+      <th scope="col">Date</th>
+      <th scope="col">Status</th>
+      <th scope="col">Delivery Address</th>
+      <th scope="col">Recipient</th>
+    </tr>
+  </thead>
+  <tbody>
 {% for order_detail in order_detail %}
-   <p>{{order_detail.order_date}} {{order_detail.order_status}} {{order_detail.order_value}}</p>
-{% endfor %}
+<TR>
+   <!-- add images? <TD class="c1"><IMG src="favicon.ico"></TD> -->
+   <TD class="c1">{{order_detail.id}}</TD>
+   <TD class="c2">{{order_detail.customer_id}}</TD>
+   <TD class="c3">{{order_detail.order_value}}</TD>
+   <TD class="c4">{{order_detail.order_date}}</TD>
+   <TD class="c5">{{order_detail.order_status}}</TD>
+   <TD class="c6">{{order_detail.delivery_address_id}}</TD>
+   <TD class="c7">{{order_detail.delivery_recipient}}</TD>
 
+</TR>
+
+{% endfor %}
+    </table>
     <br>
     {{ message }}
+    <button><a href="/orders">Return to all orders</a></button>
 </div>
 {% endblock %}
 </body>

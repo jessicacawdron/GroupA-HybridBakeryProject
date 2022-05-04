@@ -1,0 +1,41 @@
+<!-- inherits from layout.html template -->
+{% extends "layout.html" %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enquiries</title>
+</head>
+<body>
+
+<!-- this block of content drops into placeholder in layout.html -->
+{% block body_content %}
+<h1> Customer enquiries</h1>
+<div>
+    <table class="table">
+  <thead class = "thead-light">
+    <tr>
+      <th scope="col">Customer name</th>
+      <th scope="col">Customer email</th>
+      <th scope="col">Enquiry</th>
+      <th scope="col">Customer number</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for enquiry in enquiry %}
+<TR>
+   <!-- add images? <TD class="c1"><IMG src="favicon.ico"></TD> -->
+   <TD class="c1">{{enquiry.full_name}}</TD>
+   <TD class="c2">{{enquiry.email_enquiry}}</TD>
+   <TD class="c3">{{enquiry.message}}</TD>
+   <TD class="c4">{{enquiry.email_id}}</TD>
+</TR>
+
+{% endfor %}
+    </table>
+        <br>
+    {{ message }}
+</div>
+{% endblock %}
+</body>
+</html>
