@@ -265,6 +265,13 @@ def profile():
     product = service.get_product(recommendation)
     return render_template('profile.html', customer=details, title='Profile', name=current_user.first_name, number=current_user.id, phone=current_user.phone_number, email=current_user.email, product = product )
 
+@app.route('/staffprofile')
+@login_required
+def staffprofile():
+    details = service.get_my_profile(current_user)
+    return render_template('staffprofile.html', customer=details, title='Profile', name=current_user.first_name, number=current_user.id, phone=current_user.phone_number, email=current_user.email )
+
+
 @app.route('/myorders')
 @login_required
 def show_my_orders():

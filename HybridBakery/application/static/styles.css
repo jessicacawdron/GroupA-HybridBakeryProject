@@ -104,44 +104,18 @@ hr{
   color: white;
 }
 
-.discover-text p {
-    color: #fff;
-    display: inline;
+.discover-text{
+    position: absolute;
+    padding-right: 450px;
+}
+
+
+.discover-text p{
+    color: #F0FFF0;
     font-size: 22px;
     width: 600px;
-    text-align: center;
-    position: absolute;
-    bottom: 20px;
-    right: 25%;
 }
 
-.s2-img {
-  opacity: 1;
-  display: block;
-  width: 100%;
-  height: auto;
-  transition: .5s ease;
-  backface-visibility: hidden;
-}
-
-.middle {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.s2overlay:hover .s2-img {
-  opacity: 0.3;
-}
-
-.s2overlay:hover .middle {
-  opacity: 1;
-}
 
 .text1 {
   background-color: #white;
@@ -335,6 +309,14 @@ footer {
   background-color: #C1958C;
   border: 2px solid #C1958C;
   color: white;
+}
+
+.enquirybox {
+    height: 135px;
+}
+
+.formtext {
+    font-size: 16px;
 }
 
 /*checkout*/

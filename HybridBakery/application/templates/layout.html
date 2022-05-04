@@ -36,15 +36,20 @@
               <a class="nav-link" href="/checkout">Checkout</a>
             </li>
             {% endif %}
+            {% if current_user.user_role == "staff" %}
+            <li class="nav-item">
+              <a class="nav-link" href="/staffprofile">Profile</a>
+            </li>
+            {% endif %}
             {% if current_user.user_role == "client" %}
             <li class="nav-item">
               <a class="nav-link" href="/myorders">My Orders</a>
             </li>
-            {% endif %}
-            {% if current_user.user_role == "client" or current_user.user_role == "staff" %}
             <li class="nav-item">
               <a class="nav-link" href="/profile">Profile</a>
             </li>
+            {% endif %}
+            {% if current_user.user_role == "client" or current_user.user_role == "staff" %}
             <li class="nav-item">
               <a class="nav-link" href="/logout">Logout</a>
             </li>
