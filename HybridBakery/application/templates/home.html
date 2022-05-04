@@ -11,6 +11,14 @@
 <!-- this block of content drops into placeholder in layout.html -->
 {% block body_content %}
 <br>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0] }}
+    </div>
+    {% endif %}
+    {% endwith %}
+<br>
 <div class="section1">
     <div class="row">
         <div class="col-md-6 gx-5 mb-4" style="text-align:right;">
