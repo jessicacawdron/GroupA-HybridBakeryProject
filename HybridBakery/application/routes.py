@@ -252,8 +252,9 @@ def signup_post():
     # add the new user to the database
     db.session.add(new_customer)
     db.session.commit()
-
-    return redirect(url_for('login'))
+    if form.validate_on_submit():
+        flash(f'Success - account created for {form.first_name.data}!', 'success')
+        return redirect(url_for('login'))
 
 
 @app.route('/profile')
