@@ -18,6 +18,7 @@ from application.forms.enquiryForm import EnquiryForm
 from application.models.enquiry import Enquiry
 
 
+@app.route('/')
 @app.route('/home', methods=['GET'])
 def welcome():
     form = EnquiryForm()
