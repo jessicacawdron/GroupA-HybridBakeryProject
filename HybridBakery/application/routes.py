@@ -181,7 +181,7 @@ def show_orders():
             error = "There are no orders to display this week :("
         return render_template('orders.html', order_detail=details, message=error)
     elif current_user.user_role == "client":
-        return render_template('home.html')
+        return redirect(url_for('welcome'))
 
 
 @app.route('/orders/date/<time>', methods=['GET'])
@@ -194,7 +194,7 @@ def show_orders_by_date(time):
             error = "There are no orders to display this week :("
         return render_template('weeks_orders.html', order_detail=details, time=time, message=error)
     elif current_user.user_role == "client":
-        return render_template('home.html')
+        return redirect(url_for('welcome'))
 
 
 @app.route('/orders/status/<order_status>', methods=['GET'])
@@ -207,7 +207,7 @@ def show_orders_by_status(order_status):
             error = "There are no orders to display"
         return render_template('order_status.html', order_detail=details, message=error)
     elif current_user.user_role == "client":
-        return render_template('home.html')
+        return redirect(url_for('welcome'))
 
 
 @app.route('/enquiries', methods=['GET'])
@@ -220,7 +220,7 @@ def show_enquiries():
             error = "There are no enquiries to display"
         return render_template('enquiries.html', enquiry=details, message=error)
     elif current_user.user_role == "client":
-        return render_template('home.html')
+        return redirect(url_for('welcome'))
 
 
 # signup, profile, login routes
