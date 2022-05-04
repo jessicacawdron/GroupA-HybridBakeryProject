@@ -31,8 +31,7 @@
                 <h2 style="font-weight:bold;">OUR LITTLE BAKERY
                     <span style="color:#C1958C; ">BREAKING THE MOULD</span>
                 </h2>
-                <p>Here at Hybrid Bakery we are proud to offer a range of unique, tasty bakes.<br>
-                    All our products are made fresh on site and we offer vegan options on all our bakes.<br></p>
+                <p style="padding-top:8px;"> Since January 2022 our skilled bakers have been bringing our hybrid bakes to the people of Leeds and beyond.</p>
             </div>
         </div>
         <div class="col-md-2 gx-5 mb-4">
@@ -41,20 +40,17 @@
 </div>
 <hr>
 <div class="section2">
-    <div class="s2-overlay">
         <img class="s2-img" src="{{ url_for('static', filename='/images/bakery3.jpeg') }}" style="width:100%;"/>
-        <div class="middle">
-            <div class="text1">Discover More</div>
+        <div class="discover-text">
+            <div class="col-2"></div>
+            <div class="col-6">
+                <p style="color:#F0FFF0;">Here at Hybrid Bakery we are proud to offer a range of unique, tasty bakes.
+                    All our products are made fresh on site and we offer vegan options on all our bakes!<br>
+                    <br>
+                    <a class="btn btn-lg btn-outline-light" href="/products">Discover More</a></p>
+            </div>
+            <div class="col-4"></div>
         </div>
-    <div class="discover-text">
-        <div class="col-2"></div>
-        <div class="col-6">
-        <p>Our bakes combine well known desserts and pastry types such as
-        the Cronut - a croissant and donut cross, or the Townie - a tart and brownie mix.</p>
-        </div>
-        <div class="col-4"></div>
-    </div>
-    </div>
 </div>
 <hr>
 <div class="section3">
@@ -112,31 +108,40 @@
     <div class="form-container">
         <form method="POST" action="/home">
             <!-- provides CRSF protection, alongside secret key. Use on all POST forms -->
-            {{ form.csrf_token }}<h3 style="text-align:center;">Enquiry form</h3>
+            {{ form.csrf_token }}<h4 style="text-align:center; color:#1E2433; font-weight:bold;">CONTACT US</h4>
+            <br>
+            <p style="text-align:center; color:#1E2433;">Have a question or a special order? Use the form below to get in touch.</p>
+            <br>
             <div class="row">
-                <div class = "mb-3">
-                    <div class="col-md-3">{{ form.full_name.label(class_="form-label") }}</div>
-                    <div class="col-md-12">{{ form.full_name(class_="form-control", size =32)}}</div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class = "mb-3">
+                            <div class="col-md-3">{{ form.full_name.label(class_="form-label formtext") }}</div>
+                            <div class="col-md-12">{{ form.full_name(class_="form-control", size=32)}}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class = "mb-3">
+                            <div class="col-md-3">{{ form.email_enquiry.label(class_="form-label formtext")}}</div>
+                            <div class="col-md-12">{{ form.email_enquiry(class_="form-control", size=32)}}</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class = "mb-3">
-                    <div class="col-md-3">{{ form.email_enquiry.label(class_="form-label")}}</div>
-                    <div class="col-md-12">{{ form.email_enquiry(class_="form-control", size =32)}}</div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class = "mb-3">
+                            <div class="col-md-6">{{ form.message.label(class_="form-label formtext")}}</div>
+                            <div class="col-md-12">{{ form.message(class_="form-control enquirybox", size=32)}}</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class = "mb-3">
-                    <div class="col-md-3">{{ form.message.label(class_="form-label")}}</div>
-                    <div class="col-md-12">{{ form.message(class_="form-control", size=32)}}</div>
                 </div>
-            </div>
-            <div class="row">
-                <div class = "mb-3">
-                    <div class="col-md-3">{{ form.submit(class_="btn btn-primary mb-3 form-btn") }}</div>
+                <div class="row">
+                    <div class = "mb-3">
+                        <div class="col-md-3">{{ form.submit(class_="btn btn-outline-light mb-3 form-btn") }}</div>
+                    </div>
                 </div>
-            </div>
-            {{ message }}
+                {{ message }}
         </form>
     </div>
 </section>
@@ -144,4 +149,3 @@
 {% endblock %}
 </body>
 </html>
-  <!--Main layout-->

@@ -1,18 +1,23 @@
 {% extends "layout.html" %}
 
 {% block body_content %}
-<h1 class="title">
+<h1 style="color:#1E2433"><b>
   {{ name }}'s Profile
-</h1>
-<div>
-  <p>Your customer number: {{number}}</p>
-  <p>Your contact telephone number: {{phone}} <button type="button" class="btn btn-outline-secondary">edit</button></p>
-  <p>Your e-mail address: {{email}} <button type="button" class="btn btn-outline-secondary">edit</button></p>
-  <p>Your marketing preferences: Please keep me updated by e-mail and text <button type="button" class="btn btn-outline-secondary">edit</button></p>
-  <p>Our random recommendation for you today:</p>
-</div>
+</b></h1>
+<div class="profile-container">
+    <div class="row">
+        <div class="col-2">
+            <img src="{{ url_for('static', filename='/images/profile.png') }}" style="width:100%;">
+        </div>
+        <div class="col-7" style="padding-left:10px; padding-top:20px;">
+            <p>Your customer number: {{number}}</p>
+            <p>Your contact telephone number: {{phone}} <button type="button" class="btn btn-outline-secondary">edit</button></p>
+            <p>Your e-mail address: {{email}} <button type="button" class="btn btn-outline-secondary">edit</button></p>
+            <p>Your marketing preferences: Please keep me updated by e-mail and text <button type="button" class="btn btn-outline-secondary">edit</button></p>
+        </div>
+        <div class="col-3">
+            <p>Our random recommendation for you today:</p>
 {% set img = '{}.jpg'.format(product.product_name) %}
-        <div class="col-sm-4">
             <div class="card">
                 <div class="card-image">
                     <img src="{{ url_for('static', filename='/images/' + img) }}" alt="{{product.product_name}}" class="card-img-top"  style="height: 10%">
@@ -34,5 +39,5 @@
                 </div>
             </div>
         </div>
-
+</div>
 {% endblock %}

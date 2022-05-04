@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block body_content %}
+<h1 style="color:#1E2433"><b>
+  {{ name }}'s Profile
+</b></h1>
+<div class="profile-container">
+    <div class="row">
+        <div class="col-2">
+            <img src="{{ url_for('static', filename='/images/staff.png') }}" style="width:100%;">
+        </div>
+        <div class="col-7" style="padding-left:10px; padding-top:50px;">
+            <p>Your staff number: {{number}}</p>
+            <p>Your contact telephone number: {{phone}} <button type="button" class="btn btn-outline-secondary">edit</button></p>
+            <p>Your e-mail address: {{email}} <button type="button" class="btn btn-outline-secondary">edit</button></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
