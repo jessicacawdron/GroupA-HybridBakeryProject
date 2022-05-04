@@ -13,8 +13,8 @@ from application.models.address import Address
 from application.models.customer import Customer
 import os
 
-from HybridBakery.application.forms.enquiryForm import EnquiryForm
-from HybridBakery.application.models.enquiry import Enquiry
+from application.forms.enquiryForm import EnquiryForm
+from application.models.enquiry import Enquiry
 
 
 @app.route('/home', methods=['GET'])
@@ -251,8 +251,9 @@ def signup_post():
     # add the new user to the database
     db.session.add(new_customer)
     db.session.commit()
-
-    return redirect(url_for('login'))
+    if form.validate_on_submit():
+        flash(f'Success - account created for {form.first_name.data}!', 'success')
+        return redirect(url_for('login'))
 
 
 @app.route('/profile')

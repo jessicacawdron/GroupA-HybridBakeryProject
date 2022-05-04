@@ -10,6 +10,7 @@
 
 <!-- this block of content drops into placeholder in layout.html -->
 {% block body_content %}
+<br>
 <div class="section1">
     <div class="row">
         <div class="col-md-6 gx-5 mb-4" style="text-align:right;">
@@ -32,102 +33,107 @@
 </div>
 <hr>
 <div class="section2">
-    <div class="row">
-    <img src="{{ url_for('static', filename='/images/bakery3.jpeg') }}" class="img-fluid" />
-    <!--    <div class="container">-->
-    <!--        <img class="home-s2-img" src="{{ url_for('static', filename='/images/bakery3.jpeg') }}" />-->
-    <!--        <div class="s2-img-overlay">-->
-    <!--            <div class="discover-text">Our bakes combine well known deserts and pastry types such as-->
-    <!--                the Cronut - a croissant and donut cross, or the Townie - a tart and brownie mix.</div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--</div>-->
+    <div class="s2-overlay">
+        <img class="s2-img" src="{{ url_for('static', filename='/images/bakery3.jpeg') }}" style="width:100%;"/>
+        <div class="middle">
+            <div class="text1">Discover More</div>
         </div>
+    <div class="discover-text">
+        <div class="col-2"></div>
+        <div class="col-6">
+        <p>Our bakes combine well known deserts and pastry types such as
+        the Cronut - a croissant and donut cross, or the Townie - a tart and brownie mix.</p>
+        </div>
+        <div class="col-4"></div>
+    </div>
+    </div>
 </div>
-    <hr>
-    <div class="section3">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active p-4">
-                    <p class="d-block w-100" >
-                        I ordered a mix of bakes for my friends baby shower, we couldn't believe how yummy everything was!<br>
-                        They were so accommodating with such a large order too. We will definitely order again.<br>
-                        Miss Brown</p>
-                </div>
-                <div class="carousel-item p-4">
-                    <p class="d-block w-100">
-                        Hybrid Bakery is my favourite! Everything is always so fresh.<br>
-                        I can't resist popping in on my lunch breaks!<br>
-                        Sally Scott</p>
-                </div>
-                <div class="carousel-item p-4">
-                    <p class="d-block w-100">
-                        As a vegan it can be hard to find taste bakes<br>
-                        but the Hybrid Bakery vegan bakes are amazing - they're my go to!<br>
-                        Tom Hope</p>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+<hr>
+<div class="section3">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="carousel-btn active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" class="carousel-btn" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" class="carousel-btn" aria-label="Slide 3"></button>
         </div>
-    </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active p-4">
+                <div class="d-block w-100" >
+                    <p><i>"I ordered a mix of bakes for my friends baby shower, we couldn't believe how yummy everything was!<br>
+                        They were so accommodating with such a large order too. We will definitely order again."</i></p>
+                    <br>
+                    <p style="font-size:12px">MISS BROWN</p></div>
+                <br>
+            </div>
+            <div class="carousel-item p-4">
+                <div class="d-block w-100">
+                    <p><i>"Hybrid Bakery is my favourite! Everything is always so fresh.<br>
+                    I can't resist popping in on my lunch breaks!"</i></p>
+                    <br>
+                    <p style="font-size:12px">SALLY SCOTT</p></div>
+                <br>
+            </div>
+            <div class="carousel-item p-4">
+                <div class="d-block w-100">
+                    <p><i>"As a vegan it can be hard to find taste bakes<br>
+                        but the Hybrid Bakery vegan bakes are amazing - they're my go to!"</i></p>
+                    <br>
+                    <p style="font-size:12px">TOM HOPE</p></div>
+                <br>
+            </div>
         </div>
-      </section>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-        <section>
-            {% with messages = get_flashed_messages() %}
+</div>
+<hr>
+<section>
+    {% with messages = get_flashed_messages() %}
     {% if messages %}
     <div class="notification is-danger">
         {{ messages[0] }}
     </div>
-{% endif %}
-{% endwith %}
-            <h3>Enquiry form</h3>
-      <!--Section: Content-->
-    <form method="POST" action="/home">
-        <!-- provides CRSF protection, alongside secret key. Use on all POST forms -->
-        {{ form.csrf_token }}
-        <div class="row">
-            <div class = "mb-3">
-                <div class="col-md-2">{{ form.full_name.label(class_="form-label") }}</div>
-                <div class="col-md-4">{{ form.full_name(class_="form-control", size =32)}}</div>
+    {% endif %}
+    {% endwith %}
+    <div class="form-container">
+        <form method="POST" action="/home">
+            <!-- provides CRSF protection, alongside secret key. Use on all POST forms -->
+            {{ form.csrf_token }}<h3 style="text-align:center;">Enquiry form</h3>
+            <div class="row">
+                <div class = "mb-3">
+                    <div class="col-md-3">{{ form.full_name.label(class_="form-label") }}</div>
+                    <div class="col-md-12">{{ form.full_name(class_="form-control", size =32)}}</div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class = "mb-3">
-                <div class="col-md-2">{{ form.email_enquiry.label(class_="form-label")}}</div>
-                <div class="col-md-4">{{ form.email_enquiry(class_="form-control", size =32)}}</div>
+            <div class="row">
+                <div class = "mb-3">
+                    <div class="col-md-3">{{ form.email_enquiry.label(class_="form-label")}}</div>
+                    <div class="col-md-12">{{ form.email_enquiry(class_="form-control", size =32)}}</div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class = "mb-3">
-                <div class="col-md-2">{{ form.message.label(class_="form-label")}}</div>
-                <div class="col-md-10">{{ form.message(class_="form-control", size =32)}}</div>
+            <div class="row">
+                <div class = "mb-3">
+                    <div class="col-md-3">{{ form.message.label(class_="form-label")}}</div>
+                    <div class="col-md-12">{{ form.message(class_="form-control", size=32)}}</div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class = "mb-3">
-                <div class="col-md-2">{{ form.submit(class_="btn btn-primary mb-3") }}</div>
+            <div class="row">
+                <div class = "mb-3">
+                    <div class="col-md-3">{{ form.submit(class_="btn btn-primary mb-3 form-btn") }}</div>
+                </div>
             </div>
-        </div>
-        {{ message }}
-    </form>
-      </section>
-      <!--Section: Content-->
-  </main>
-
+            {{ message }}
+        </form>
+    </div>
+</section>
+<hr>
 {% endblock %}
-    </body>
+</body>
 </html>
   <!--Main layout-->

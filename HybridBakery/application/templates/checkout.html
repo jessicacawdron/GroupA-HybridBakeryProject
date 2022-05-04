@@ -10,7 +10,7 @@
 
 <!-- this block of content drops into placeholder in layout.html -->
 {% block body_content %}
-<h1>Checkout</h1>
+<h1 style="color:#1E2433"><b> Checkout </b></h1>
 <div>
     <table class="table">
   <thead class = "thead-light">
@@ -25,7 +25,7 @@
 {% for product in products %}
 <TR>
    <!-- add images? <TD class="c1"><IMG src="favicon.ico"></TD> -->
-   <TD class="c1"><a href="/products/{{product.product_name}}">{{product.product_name}}</a></TD>
+   <TD class="c1"><a class="basket-link" href="/products/{{product.product_name}}">{{product.product_name}}</a></TD>
    <TD class="c2">£{{product.price}}</TD>
    <TD class="c3">{{session[product.product_name]}}</TD>
    <TD class="c4">£{{product.total}}</TD>
@@ -40,7 +40,7 @@
    <TD class="c4">£{{"{:.2f}".format(checkout_total)}}</TD>
 </TR>
     </table>
-<h3>Buy for £{{"{:.2f}".format(checkout_total)}}</h3>
+<h4>Buy for £{{"{:.2f}".format(checkout_total)}}</h4>
 <form action="/checkout" method="post">
       <script
         src="https://checkout.stripe.com/checkout.js"
